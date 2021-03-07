@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.microfoolish.it.sso.cas.server.config.CasEmbeddedContainerTomcatConfiguration,\
+  com.microfoolish.it.sso.cas.server.config.CasEmbeddedContainerTomcatFiltersConfiguration
+
