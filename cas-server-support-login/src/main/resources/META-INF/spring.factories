@@ -1,0 +1,3 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    com.microfoolish.it.sso.cas.login.config.CustomLoginAutoConfiguration,\
+    com.microfoolish.it.sso.cas.login.config.CasRoleAuthorizationConfiguration

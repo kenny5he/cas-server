@@ -1,0 +1,9 @@
+{
+  "@class" : "org.apereo.cas.services.RegexRegisteredService",
+  "serviceId" : "^https://microservice.microfoolish.com:9443",
+  "name" : "SSO Management",
+  "theme" : "apereo",
+  "id" : 10000005,
+  "description" : "SSO Management",
+  "evaluationOrder" : 1
+}

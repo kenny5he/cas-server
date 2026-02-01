@@ -1,0 +1,9 @@
+{
+  "@class" : "org.apereo.cas.services.RegexRegisteredService",
+  "serviceId" : "^https://microservice.microfoolish.com:48003",
+  "name" : "Auth",
+  "theme" : "apereo",
+  "id" : 10000003,
+  "description" : "Auth Server",
+  "evaluationOrder" : 1
+}

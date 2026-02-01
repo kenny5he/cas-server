@@ -1,0 +1,14 @@
+version: '3.7'
+services:
+  cas:
+    container_name: cas
+    environment:
+      MYSQL_ROOT_PASSWORD: "LafjYBdBb%z"
+    image: mysql:5.7
+    restart: unless-stopped
+    volumes:
+      - "/Users/apaye/workspace/docker/mysql/cas/data:/var/lib/mysql"
+      - "/Users/apaye/workspace/docker/mysql/cas/conf:/etc/mysql/conf.d"
+      - "/Users/apaye/workspace/docker/mysql/cas/logs/:/logs"
+    ports:
+      - "23306:3306"

@@ -1,0 +1,10 @@
+{
+  "@class" : "org.apereo.cas.support.saml.services.SamlRegisteredService",
+  "serviceId" : "^https://microservice.microfoolish.com:2443",
+  "name" : "Jalova-Console",
+  "theme" : "apereo",
+  "id" : 100000021,
+  "metadataLocation": "jdbc:mysql://localhost:23306/cas",
+  "description" : "Jalova Console",
+  "evaluationOrder" : 2
+}
