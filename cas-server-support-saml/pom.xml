@@ -1,0 +1,31 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.microfoolish.it.sso</groupId>
+        <artifactId>cas-server</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>cas-server-support-saml</artifactId>
+    <packaging>jar</packaging>
+
+    <name>cas-server-support-saml</name>
+
+    <dependencies>
+        <!-- SAML -->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-saml-idp</artifactId>
+            <version>${cas.server.version}</version>
+        </dependency>
+
+        <!-- SAML JPA -->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-saml-idp-metadata-jpa</artifactId>
+            <version>${cas.server.version}</version>
+        </dependency>
+    </dependencies>
+</project>

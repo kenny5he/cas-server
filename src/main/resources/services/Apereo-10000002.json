@@ -1,9 +1,0 @@
-{
-  "@class" : "org.apereo.cas.services.RegexRegisteredService",
-  "serviceId" : "^https://microservice.microfoolish.com",
-  "name" : "FrameworkDemo",
-  "theme" : "apereo",
-  "id" : 10000002,
-  "description" : "Framework Micro Service Demo",
-  "evaluationOrder" : 1
-}

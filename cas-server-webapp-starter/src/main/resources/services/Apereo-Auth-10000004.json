@@ -1,0 +1,9 @@
+{
+  "@class" : "org.apereo.cas.services.RegexRegisteredService",
+  "serviceId" : "^https://microservice.microfoolish.com:1443",
+  "name" : "Jalova Demo",
+  "theme" : "apereo",
+  "id" : 10000004,
+  "description" : "Jalova Demo",
+  "evaluationOrder" : 1
+}

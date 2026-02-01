@@ -1,0 +1,14 @@
+version: '3.7'
+services:
+  cas-server:
+    container_name: cas-server
+    environment:
+      MYSQL_ROOT_PASSWORD: "LafjYBdBb%z"
+    image: microfoolish/jalova:openjdk11-latest
+    restart: unless-stopped
+    volumes:
+      - "/Users/apaye/workspace/docker/cas/libs:/app/libs"
+      - "/Users/apaye/workspace/docker/cas/files:/app/files"
+      - "/Users/apaye/workspace/docker/cas/logs/:/app/logs"
+    ports:
+      - "23306:8080"

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>cas-server</artifactId>
+        <groupId>com.microfoolish.it.sso</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>cas-server-support-captcha</artifactId>
+
+    <dependencies>
+        <!-- 验证码 -->
+        <!--<dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-captcha</artifactId>
+            <version>${cas.server.version}</version>
+        </dependency>-->
+        <!-- 验证码核心包 -->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-captcha-core</artifactId>
+            <version>${cas.server.version}</version>
+        </dependency>
+
+    </dependencies>
+
+</project>

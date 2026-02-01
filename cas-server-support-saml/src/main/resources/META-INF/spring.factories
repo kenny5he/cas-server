@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    com.microfoolish.it.sso.saml.config.SamlAutoConfiguration
