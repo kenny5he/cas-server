@@ -13,9 +13,9 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-        <cas.server.version>6.5.3</cas.server.version>
+        <maven.compiler.source>25</maven.compiler.source>
+        <maven.compiler.target>25</maven.compiler.target>
+        <cas.server.version>7.3.3</cas.server.version>
         <tomcat.version>9.0.38</tomcat.version>
         <mapstruct.version>1.4.1.Final</mapstruct.version>
         <lombok.version>1.18.24</lombok.version>
@@ -132,12 +132,6 @@
 
         <dependency>
             <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-core-configuration-metadata-repository</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-core-events-configuration</artifactId>
             <version>${cas.server.version}</version>
         </dependency>
@@ -215,12 +209,6 @@
             <version>${cas.server.version}</version>
         </dependency>-->
         <!-- Authy End -->
-
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-webapp-config</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
 
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -304,8 +292,8 @@
 
 
     <dependencyManagement>
-        <dependencies>
-            <!-- Spring Boot 依赖版本管理 -->
+        <!--<dependencies>
+            &lt;!&ndash; Spring Boot 依赖版本管理 &ndash;&gt;
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
@@ -313,7 +301,7 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
-        </dependencies>
+        </dependencies>-->
     </dependencyManagement>
 
     <repositories>

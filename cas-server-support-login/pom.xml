@@ -26,12 +26,6 @@
 
         <dependency>
             <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-pac4j</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-support-pac4j-core-clients</artifactId>
             <version>${cas.server.version}</version>
         </dependency>

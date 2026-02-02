@@ -23,7 +23,7 @@
         <dependency>
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-support-redis-ticket-registry</artifactId>
-            <version>${cas.server.version}</version>
+            <!--<version>${cas.server.version}</version>-->
         </dependency>
     </dependencies>
 </project>

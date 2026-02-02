@@ -18,14 +18,14 @@
         <dependency>
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-support-saml-idp</artifactId>
-            <version>${cas.server.version}</version>
+            <!--<version>${cas.server.version}</version>-->
         </dependency>
 
         <!-- SAML JPA -->
         <dependency>
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-support-saml-idp-metadata-jpa</artifactId>
-            <version>${cas.server.version}</version>
+            <!--<version>${cas.server.version}</version>-->
         </dependency>
     </dependencies>
 </project>
