@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.microfoolish.it.sso</groupId>
         <artifactId>cas-server</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>7.3.0-SNAPSHOT</version>
     </parent>
     <artifactId>cas-server-support-oauth</artifactId>
 
