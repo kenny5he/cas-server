@@ -8,89 +8,50 @@
         <version>7.3.0-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>cas-server-webapp-starter</artifactId>
 
     <dependencies>
-        <!-- Cas Server Tomcat Webapp  -->
+        <!-- Cas Server Webapp  -->
         <dependency>
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-webapp-init</artifactId>
             <version>${cas.server.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-webapp-init-config-server</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <!-- CAS Application Config -->
+        <!-- CAS Server Webapp Resources -->
         <dependency>
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-webapp-resources</artifactId>
             <version>${cas.server.version}</version>
         </dependency>
 
-        <!-- CAS War -->
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-webapp-tomcat</artifactId>
-            <version>${cas.server.version}</version>
-            <type>war</type>
-        </dependency>
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-rest-service-registry</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-thymeleaf</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-themes-collection</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <!-- Tomcat  Start -->
+        <!-- Tomcat  -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <version>${spring-boot.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-catalina-ha</artifactId>
             <version>${tomcat.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-el</artifactId>
-            <!--<version>${tomcat.version}</version>-->
-        </dependency>
-        <!-- Tomcat  End -->
-
+        <!-- Cas Server Modules -->
+        <!-- Notification -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>cas-server-support-mail</artifactId>
             <version>${project.version}</version>
         </dependency>
-
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>cas-server-support-sms</artifactId>
             <version>${project.version}</version>
         </dependency>
 
+        <!-- Captcha 验证码 -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>cas-server-support-captcha</artifactId>
@@ -111,19 +72,37 @@
 
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>cas-server-support-account</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>cas-server-support-pm</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>cas-server-support-login</artifactId>
+            <artifactId>cas-server-support-pac4j</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>cas-server-support-account</artifactId>
+            <artifactId>cas-server-support-oauth2</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>cas-server-support-authn</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>cas-server-support-saml</artifactId>
             <version>${project.version}</version>
         </dependency>
 
@@ -135,7 +114,7 @@
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>cas-server-support-saml</artifactId>
+            <artifactId>cas-server-support-service-registry</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

@@ -9,28 +9,20 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cas-server-support-ticket</artifactId>
+    <artifactId>cas-server-support-authn</artifactId>
 
     <dependencies>
 
         <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-core-tickets</artifactId>
-            <version>${cas.server.version}</version>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
         </dependency>
 
-        <!-- Ticket  JPA -->
-        <!--<dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-jpa-ticket-registry</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>-->
-
-        <!-- Ticket Redis -->
         <dependency>
             <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-redis-ticket-registry</artifactId>
+            <artifactId>cas-server-core-authentication-api</artifactId>
             <version>${cas.server.version}</version>
         </dependency>
     </dependencies>
+
 </project>

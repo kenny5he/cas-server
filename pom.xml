@@ -16,9 +16,9 @@
         <maven.compiler.source>25</maven.compiler.source>
         <maven.compiler.target>25</maven.compiler.target>
         <cas.server.version>7.3.3</cas.server.version>
-        <tomcat.version>9.0.38</tomcat.version>
-        <mapstruct.version>1.4.1.Final</mapstruct.version>
-        <lombok.version>1.18.24</lombok.version>
+        <tomcat.version>11.0.15</tomcat.version>
+        <mapstruct.version>1.6.3</mapstruct.version>
+        <lombok.version>1.18.42</lombok.version>
         <spring-boot.version>4.1.0-M1</spring-boot.version>
         <spring-cloud.version>2025.1.1</spring-cloud.version>
     </properties>
@@ -26,25 +26,22 @@
     <modules>
         <module>cas-server-webapp-starter</module>
         <module>cas-server-support-pm</module>
-        <module>cas-server-support-sms</module>
-        <module>cas-server-support-mail</module>
         <module>cas-server-support-cookie</module>
         <module>cas-server-support-session</module>
         <module>cas-server-support-captcha</module>
-        <module>cas-server-support-login</module>
+        <module>cas-server-support-authn</module>
         <module>cas-server-support-account</module>
         <module>cas-server-support-ticket</module>
         <module>cas-server-support-saml</module>
-        <module>cas-server-support-oauth</module>
+        <module>cas-server-support-themes</module>
+        <module>cas-server-support-notification</module>
+        <module>cas-server-authentication</module>
+        <module>cas-server-integration</module>
+        <module>cas-server-support-audit</module>
+        <module>cas-server-support-service-registry</module>
     </modules>
 
     <dependencies>
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-core-util-api</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
         <dependency>
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-core</artifactId>
@@ -53,75 +50,7 @@
 
         <dependency>
             <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-core-tickets</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-core-logout</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <!-- Swagger -->
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-swagger</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <!--<dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-account-mgmt</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>-->
-
-        <!--<dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-jpa-service-registry</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>-->
-
-        <!-- 审计日志 -->
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-core-audit</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-audit-jdbc</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-core-authentication-mfa</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-core-webflow-mfa-api</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-core-authentication</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-core-web</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-jdbc</artifactId>
+            <artifactId>cas-server-core-util-api</artifactId>
             <version>${cas.server.version}</version>
         </dependency>
 
@@ -145,6 +74,32 @@
 
         <dependency>
             <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-core-logout</artifactId>
+            <version>${cas.server.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-core-web</artifactId>
+            <version>${cas.server.version}</version>
+        </dependency>
+
+        <!-- Swagger -->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-swagger</artifactId>
+            <version>${cas.server.version}</version>
+        </dependency>
+
+        <!-- JDBC -->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-jdbc</artifactId>
+            <version>${cas.server.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-support-validation</artifactId>
             <version>${cas.server.version}</version>
         </dependency>
@@ -155,87 +110,11 @@
             <version>${cas.server.version}</version>
         </dependency>
 
-        <!-- 样式 主题 -->
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-themes</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-themes-core</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-
-        <!-- Person dir 多用户整合 Start -->
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-person-directory</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-        <!-- Person dir 多用户整合 End -->
-
-        <!-- CAS MFA SIMPLE Start -->
-        <!--<dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-simple-mfa</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-simple-mfa-core</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>-->
-        <!-- CAS MFA SIMPLE End -->
-
-        <!-- Authy 双因子认证框架 -->
-        <!--<dependency>
-            <groupId>com.authy</groupId>
-            <artifactId>authy-java</artifactId>
-            <version>1.5.1</version>
-        </dependency>-->
-
-        <!--<dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-authy</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>-->
-
-        <!--<dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-authy-core</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>-->
-        <!-- Authy End -->
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.30</version>
-        </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
         </dependency>
-
-        <!-- Spring Boot 依赖项 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-dependencies</artifactId>
-            <version>${spring-boot.version}</version>
-            <type>pom</type>
-        </dependency>
-
-        <!--<dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-            <version>${spring-boot.version}</version>
-        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -243,13 +122,20 @@
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
-
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.48</version>
-        </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Spring Boot 依赖项 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>
@@ -267,7 +153,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.6.0</version>
+                <version>3.15.0</version>
                 <configuration>
                     <annotationProcessorPaths>
                         <path>
@@ -278,7 +164,7 @@
                     </annotationProcessorPaths>
                 </configuration>
             </plugin>
-            <!--<plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.2.1</version>
@@ -297,28 +183,14 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>-->
+            </plugin>
         </plugins>
     </build>
-
-
-    <dependencyManagement>
-        <dependencies>
-            <!-- Spring Boot 依赖版本管理 -->
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <scope>import</scope>
-                <type>pom</type>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <repositories>
         <repository>
             <id>sonatype-releases</id>
-            <url>http://oss.sonatype.org/content/repositories/releases/</url>
+            <url>https://oss.sonatype.org/content/repositories/releases/</url>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>

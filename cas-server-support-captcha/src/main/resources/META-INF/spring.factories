@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-    com.microfoolish.it.sso.cas.captcha.config.CustomCaptchaConfiguration
+    configuration.com.microfish.it.login.cas.captcha.CustomCaptchaConfiguration
