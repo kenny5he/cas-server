@@ -16,18 +16,10 @@
 
 package com.microfish.it.login.pac4j.platform.workwechat.profile;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import com.github.scribejava.core.exceptions.OAuthException;
-import com.github.scribejava.core.model.OAuth2AccessToken;
-import com.github.scribejava.core.model.OAuthConstants;
-import com.github.scribejava.core.model.OAuthRequest;
-import com.github.scribejava.core.model.Token;
-import com.github.scribejava.core.model.Verb;
-import com.github.scribejava.core.oauth.OAuth20Service;
-import com.github.scribejava.core.oauth.OAuthService;
-import com.microfoolish.it.sso.cas.login.pac4j.client.WorkWechatClient;
-import com.microfoolish.it.sso.cas.login.pac4j.scribe.model.WorkWechatTicketToken;
-import com.microfoolish.it.sso.cas.login.pac4j.scribe.model.WorkWechatToken;
+import java.io.IOException;
+import java.util.Optional;
+import java.util.concurrent.ExecutionException;
+
 import org.pac4j.core.client.IndirectClient;
 import org.pac4j.core.context.WebContext;
 import org.pac4j.core.exception.HttpCommunicationException;
@@ -38,10 +30,20 @@ import org.pac4j.oauth.profile.OAuth20Profile;
 import org.pac4j.oauth.profile.creator.OAuth20ProfileCreator;
 import org.pac4j.oauth.profile.wechat.WechatProfile;
 
-import java.io.IOException;
-import java.util.Optional;
-import java.util.concurrent.ExecutionException;
+import com.fasterxml.jackson.databind.JsonNode;
 
+import com.github.scribejava.core.exceptions.OAuthException;
+import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.github.scribejava.core.model.OAuthConstants;
+import com.github.scribejava.core.model.OAuthRequest;
+import com.github.scribejava.core.model.Token;
+import com.github.scribejava.core.model.Verb;
+import com.github.scribejava.core.oauth.OAuth20Service;
+import com.github.scribejava.core.oauth.OAuthService;
+
+import com.microfish.it.login.pac4j.platform.workwechat.client.WorkWechatClient;
+import com.microfish.it.login.pac4j.platform.workwechat.scribe.model.WorkWechatTicketToken;
+import com.microfish.it.login.pac4j.platform.workwechat.scribe.model.WorkWechatToken;
 
 /**
  * 企业微信 User Profile 信息

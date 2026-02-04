@@ -11,4 +11,11 @@
 
     <artifactId>cas-server-support-mail</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-mail-microsoft</artifactId>
+            <version>${cas.server.version}</version>
+        </dependency>
+    </dependencies>
 </project>

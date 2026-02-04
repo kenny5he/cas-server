@@ -16,6 +16,9 @@
 
 package com.microfish.it.login.pac4j.platform.workwechat.scribe.api;
 
+import java.io.OutputStream;
+import java.util.Map;
+
 import com.github.scribejava.core.builder.api.DefaultApi20;
 import com.github.scribejava.core.extractors.TokenExtractor;
 import com.github.scribejava.core.httpclient.HttpClient;
@@ -30,12 +33,9 @@ import com.github.scribejava.core.oauth2.bearersignature.BearerSignatureURIQuery
 import com.github.scribejava.core.oauth2.clientauthentication.ClientAuthentication;
 import com.github.scribejava.core.oauth2.clientauthentication.RequestBodyAuthenticationScheme;
 
-import com.microfoolish.it.sso.cas.login.pac4j.client.WorkWechatClient;
+import com.microfish.it.login.pac4j.platform.workwechat.client.WorkWechatClient;
 import com.microfish.it.login.pac4j.platform.workwechat.scribe.extractors.WorkWechatJsonExtractor;
 import com.microfish.it.login.pac4j.platform.workwechat.scribe.service.WorkWechatService;
-
-import java.io.OutputStream;
-import java.util.Map;
 
 /**
  * 企业微信Api

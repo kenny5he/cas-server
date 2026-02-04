@@ -16,6 +16,12 @@
 
 package com.microfish.it.login.pac4j.platform.workwechat.scribe.service;
 
+import java.io.IOException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+
+import org.pac4j.scribe.service.WechatService;
+
 import com.github.scribejava.core.builder.api.DefaultApi20;
 import com.github.scribejava.core.exceptions.OAuthException;
 import com.github.scribejava.core.httpclient.HttpClient;
@@ -27,11 +33,7 @@ import com.github.scribejava.core.model.Response;
 import com.github.scribejava.core.oauth.AccessTokenRequestParams;
 import com.microfish.it.login.pac4j.platform.workwechat.scribe.extractors.WorkWechatJsonExtractor;
 import com.microfish.it.login.pac4j.platform.workwechat.scribe.model.WorkWechatConfirmCode;
-import org.pac4j.scribe.service.WechatService;
 
-import java.io.IOException;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Future;
 
 /**
  * @author kenny.he

@@ -16,6 +16,8 @@
 
 package com.microfish.it.login.pac4j.platform.workwechat.scribe.extractors;
 
+import java.io.IOException;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.scribejava.core.extractors.OAuth2AccessTokenJsonExtractor;
 import com.github.scribejava.core.model.OAuth2AccessToken;
@@ -24,8 +26,6 @@ import com.github.scribejava.core.model.Response;
 import com.github.scribejava.core.utils.Preconditions;
 import com.microfish.it.login.pac4j.platform.workwechat.scribe.model.WorkWechatConfirmCode;
 import com.microfish.it.login.pac4j.platform.workwechat.scribe.model.WorkWechatToken;
-
-import java.io.IOException;
 
 /**
  * 企业微信

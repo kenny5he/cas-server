@@ -13,4 +13,18 @@
         <module>cas-server-support-mail</module>
         <module>cas-server-support-sms</module>
     </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-core-notifications-api</artifactId>
+            <version>${cas.server.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-core-notifications</artifactId>
+            <version>${cas.server.version}</version>
+        </dependency>
+    </dependencies>
 </project>

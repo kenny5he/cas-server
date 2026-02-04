@@ -16,13 +16,14 @@
 
 package com.microfish.it.login.pac4j.platform.workwechat.client;
 
-import com.microfoolish.it.sso.cas.login.pac4j.profile.work.wechat.WorkWechatProfileCreator;
-import com.microfoolish.it.sso.cas.login.pac4j.profile.work.wechat.WorkWechatProfileDefinition;
-import com.microfoolish.it.sso.cas.login.pac4j.scribe.builder.api.WorkWechatApi;
-import org.pac4j.oauth.client.OAuth20Client;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.pac4j.oauth.client.OAuth20Client;
+
+import com.microfish.it.login.pac4j.platform.workwechat.scribe.api.WorkWechatApi;
+import com.microfish.it.login.pac4j.platform.workwechat.profile.WorkWechatProfileCreator;
+import com.microfish.it.login.pac4j.platform.workwechat.profile.WorkWechatProfileDefinition;
 
 /**
  * 企业微信
@@ -72,13 +73,12 @@ public class WorkWechatClient extends OAuth20Client {
 
     @Override
     protected void internalInit(final boolean forceReinit) {
-        defaultProfileCreator(new WorkWechatProfileCreator(configuration, this));
-        // 设置跳转路径 Scope
-        // defaultRedirectionActionBuilder(new Wechat);
+        this.configuration.setApi(new WorkWechatApi(agentId));
+        this.configuration.setScope(this.getOAuthScope());
+        this.configuration.setProfileDefinition(new WorkWechatProfileDefinition());
+        this.configuration.setWithState(true);
+        this.setProfileCreatorIfUndefined(new WorkWechatProfileCreator(this.configuration, this));
         super.internalInit(forceReinit);
-        configuration.setScope(getOAuthScope());
-        configuration.setApi(new WorkWechatApi(agentId));
-        configuration.setProfileDefinition(new WorkWechatProfileDefinition());
     }
 
     public String getAgentId() {

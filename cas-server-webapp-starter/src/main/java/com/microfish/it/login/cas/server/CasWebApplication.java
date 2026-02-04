@@ -33,11 +33,11 @@ import org.apereo.cas.util.spring.boot.CasBanner;
  */
 @EnableDiscoveryClient
 @SpringBootApplication(proxyBeanMethods = false,
-        exclude = {
-                DataSourceAutoConfiguration.class,
-                HibernateJpaAutoConfiguration.class,
-                MailSenderAutoConfiguration.class
-        })
+    exclude = {
+        DataSourceAutoConfiguration.class,
+        HibernateJpaAutoConfiguration.class,
+        MailSenderAutoConfiguration.class
+    })
 @EnableConfigurationProperties(CasConfigurationProperties.class)
 @EnableAspectJAutoProxy(proxyTargetClass = false)
 @EnableTransactionManagement(proxyTargetClass = false)

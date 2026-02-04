@@ -16,8 +16,6 @@
 
 package com.microfish.it.login.pac4j.platform.workwechat.handle.support;
 
-import com.microfoolish.it.sso.cas.login.pac4j.Pac4jAuthenticationProperties;
-import com.microfoolish.it.sso.cas.login.pac4j.client.WorkWechatClient;
 import lombok.Synchronized;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;

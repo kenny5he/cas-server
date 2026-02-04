@@ -16,25 +16,24 @@
 
 package com.microfish.it.login.pac4j.configuration;
 
-import java.util.ArrayList;
-import java.util.Optional;
+import com.microfish.it.login.pac4j.Pac4jAuthenticationProperties;
 
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.context.annotation.Bean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * 客制化 文件配置读取
+ *
  * @author kenny.he
- * @since 2022/08/31
+ * @since 2022/07/29
  */
-@Configuration(proxyBeanMethods = false)
-public class CasRoleAuthorizationConfiguration {
-    @Bean
-    @ConditionalOnMissingBean(name = "authorizationGenerator")
-    public AuthorizationGenerator authorizationGenerator() {
-        return (context, store, profile) -> {
-            profile.addRoles(new ArrayList<>(){{add("ADMIN");}});
-            return Optional.of(profile);
-        };
-    }
+@Configuration
+@EnableConfigurationProperties({Pac4jAuthenticationProperties.class})
+public class Pac4jAuthenticationAutoConfiguration {
+    private static final Logger logger = LoggerFactory.getLogger(Pac4jAuthenticationAutoConfiguration.class);
+
+
 }
