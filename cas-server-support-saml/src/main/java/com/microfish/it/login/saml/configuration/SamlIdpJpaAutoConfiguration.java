@@ -20,20 +20,21 @@ import jakarta.annotation.PostConstruct;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.AutoConfigureBefore;
+
 import org.springframework.context.annotation.Configuration;
 
-import org.apereo.cas.config.CasSamlIdPJpaAutoConfiguration;
 
 /**
  * SAML 配置信息
+ *
+ *     SamlIdPJpaIdPMetadataConfiguration
+ *
  * @author kenny.he
  * @since 2023/02/12
  */
 @Configuration
-@AutoConfigureBefore({CasSamlIdPJpaAutoConfiguration.class})
-public class SamlAutoConfiguration {
-    private static final Logger logger = LoggerFactory.getLogger(SamlAutoConfiguration.class);
+public class SamlIdpJpaAutoConfiguration {
+    private static final Logger logger = LoggerFactory.getLogger(SamlIdpJpaAutoConfiguration.class);
 
     @PostConstruct
     public void init() {

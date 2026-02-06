@@ -36,6 +36,8 @@ import com.microfish.it.login.pac4j.platform.workwechat.scribe.model.WorkWechatC
 
 
 /**
+ * Work WeChat
+ *
  * @author kenny.he
  * @since 2022/08/09
  */
@@ -153,7 +155,7 @@ public class WorkWechatService extends WechatService {
                 }
                 OAuth2AccessToken token;
                 if (api.getAccessTokenExtractor() instanceof WorkWechatJsonExtractor) {
-                    token =  ((WorkWechatJsonExtractor)api.getAccessTokenExtractor()).extract(confirmCode,response);
+                    token = ((WorkWechatJsonExtractor)api.getAccessTokenExtractor()).extract(confirmCode,response);
                 } else {
                     throw new OAuthException("");
                 }

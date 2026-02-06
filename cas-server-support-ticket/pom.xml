@@ -12,7 +12,14 @@
     <artifactId>cas-server-support-ticket</artifactId>
 
     <dependencies>
+        <!-- Cas Server Core -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>cas-server-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
+        <!-- Ticket -->
         <dependency>
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-core-tickets</artifactId>

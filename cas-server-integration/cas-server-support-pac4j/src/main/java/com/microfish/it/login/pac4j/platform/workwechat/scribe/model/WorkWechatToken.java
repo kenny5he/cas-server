@@ -19,6 +19,8 @@ package com.microfish.it.login.pac4j.platform.workwechat.scribe.model;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
 /**
+ * Work WeChat Token
+ *
  * @author kenny.he
  * @since 2022/08/10
  */

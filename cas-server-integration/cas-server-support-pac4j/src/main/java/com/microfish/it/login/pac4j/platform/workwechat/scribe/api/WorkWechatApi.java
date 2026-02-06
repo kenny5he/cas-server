@@ -52,7 +52,9 @@ public class WorkWechatApi extends DefaultApi20 {
     public static final String AGENT_ID  = "agentid";
 
     public static final String AUTHORIZE_ENDPOINT_URL_1 = "https://open.work.weixin.qq.com/wwopen/sso/qrConnect";
+
     public static final String AUTHORIZE_ENDPOINT_URL_2 = "https://open.weixin.qq.com/connect/oauth2/authorize";
+
     public static final String TOKEN_ENDPOINT_URL = "https://qyapi.weixin.qq.com/cgi-bin/gettoken";
 
     private String agentid;

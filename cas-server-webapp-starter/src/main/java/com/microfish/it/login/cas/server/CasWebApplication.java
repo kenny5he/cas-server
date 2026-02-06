@@ -1,17 +1,17 @@
 package com.microfish.it.login.cas.server;
 
+import org.apereo.cas.configuration.CasConfigurationProperties;
+import org.apereo.cas.util.app.ApplicationUtils;
+import org.apereo.cas.util.spring.boot.CasBanner;
 import lombok.NoArgsConstructor;
 import lombok.val;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.lang3.ArrayUtils;
-
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.mail.MailSenderAutoConfiguration;
+import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -20,10 +20,8 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
-import org.apereo.cas.configuration.CasConfigurationProperties;
-import org.apereo.cas.util.app.ApplicationUtils;
-import org.apereo.cas.util.spring.boot.CasBanner;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This is {@link org.apereo.cas.web.CasWebApplication} that houses the main method.
@@ -33,11 +31,13 @@ import org.apereo.cas.util.spring.boot.CasBanner;
  */
 @EnableDiscoveryClient
 @SpringBootApplication(proxyBeanMethods = false,
-    exclude = {
-        DataSourceAutoConfiguration.class,
-        HibernateJpaAutoConfiguration.class,
-        MailSenderAutoConfiguration.class
-    })
+        exclude = {
+                DataSourceAutoConfiguration.class,
+                HibernateJpaAutoConfiguration.class,
+                MailSenderAutoConfiguration.class,
+                MongoAutoConfiguration.class,
+                MongoDataAutoConfiguration.class
+        })
 @EnableConfigurationProperties(CasConfigurationProperties.class)
 @EnableAspectJAutoProxy(proxyTargetClass = false)
 @EnableTransactionManagement(proxyTargetClass = false)

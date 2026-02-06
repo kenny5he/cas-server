@@ -32,6 +32,7 @@
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <version>${spring-boot.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.apache.tomcat</groupId>
             <artifactId>tomcat-catalina-ha</artifactId>
@@ -39,12 +40,24 @@
         </dependency>
 
         <!-- Cas Server Modules -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>cas-server-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>cas-server-authentication</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <!-- Notification -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>cas-server-support-mail</artifactId>
             <version>${project.version}</version>
         </dependency>
+
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>cas-server-support-sms</artifactId>

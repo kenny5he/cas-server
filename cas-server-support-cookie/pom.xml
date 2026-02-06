@@ -13,6 +13,12 @@
 
     <dependencies>
         <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>cas-server-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-core-cookie</artifactId>
             <version>${cas.server.version}</version>

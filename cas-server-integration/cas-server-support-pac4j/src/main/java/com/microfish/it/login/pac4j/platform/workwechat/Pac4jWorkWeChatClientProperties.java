@@ -16,12 +16,12 @@
 
 package com.microfish.it.login.pac4j.platform.workwechat;
 
-import com.microfoolish.it.sso.cas.login.pac4j.client.WorkWechatClient;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.apereo.cas.configuration.model.support.pac4j.Pac4jIdentifiableClientProperties;
-import org.pac4j.oauth.client.WechatClient;
+
+import com.microfish.it.login.pac4j.platform.workwechat.client.WorkWechatClient;
 
 /**
  * 企业微信

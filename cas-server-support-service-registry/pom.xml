@@ -10,10 +10,16 @@
     <artifactId>cas-server-support-service-registry</artifactId>
 
     <dependencies>
+        <!-- Cas Server Core -->
         <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>cas-server-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!--<dependency>
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-support-jpa-service-registry</artifactId>
             <version>${cas.server.version}</version>
-        </dependency>
+        </dependency>-->
     </dependencies>
 </project>

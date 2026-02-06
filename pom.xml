@@ -15,117 +15,51 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>25</maven.compiler.source>
         <maven.compiler.target>25</maven.compiler.target>
-        <cas.server.version>7.3.3</cas.server.version>
-        <tomcat.version>11.0.15</tomcat.version>
         <mapstruct.version>1.6.3</mapstruct.version>
         <lombok.version>1.18.42</lombok.version>
-        <spring-boot.version>4.1.0-M1</spring-boot.version>
-        <spring-cloud.version>2025.1.1</spring-cloud.version>
+        <commons-lang3.version>3.20.0</commons-lang3.version>
+        <cas.server.version>7.3.3</cas.server.version>
+        <tomcat.version>11.0.15</tomcat.version>
+        <spring-boot.version>3.5.6</spring-boot.version>
     </properties>
 
     <modules>
+        <module>cas-server-core</module>
+        <module>cas-server-authentication</module>
+        <module>cas-server-integration</module>
         <module>cas-server-webapp-starter</module>
+        <module>cas-server-support-account</module>
         <module>cas-server-support-pm</module>
         <module>cas-server-support-cookie</module>
         <module>cas-server-support-session</module>
         <module>cas-server-support-captcha</module>
+        <module>cas-server-support-jpa</module>
         <module>cas-server-support-authn</module>
-        <module>cas-server-support-account</module>
         <module>cas-server-support-ticket</module>
         <module>cas-server-support-saml</module>
         <module>cas-server-support-themes</module>
         <module>cas-server-support-notification</module>
-        <module>cas-server-authentication</module>
-        <module>cas-server-integration</module>
         <module>cas-server-support-audit</module>
         <module>cas-server-support-service-registry</module>
     </modules>
 
     <dependencies>
         <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-core</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-core-util-api</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-core-configuration</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-core-events-configuration</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-core-logging</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-core-logout</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-core-web</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <!-- Swagger -->
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-swagger</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <!-- JDBC -->
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-jdbc</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-validation</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-validation-core</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency>
     </dependencies>
 
     <dependencyManagement>
         <dependencies>
+            <!-- Commons-lang3 -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
+            </dependency>
             <!-- Spring Boot 依赖项 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>

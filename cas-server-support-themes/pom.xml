@@ -9,6 +9,12 @@
 
     <artifactId>cas-server-support-themes</artifactId>
     <dependencies>
+        <!-- Cas Server Core -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>cas-server-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-support-thymeleaf</artifactId>

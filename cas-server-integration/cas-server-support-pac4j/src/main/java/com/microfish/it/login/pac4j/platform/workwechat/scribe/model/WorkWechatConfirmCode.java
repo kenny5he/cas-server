@@ -19,7 +19,7 @@ package com.microfish.it.login.pac4j.platform.workwechat.scribe.model;
 import com.github.scribejava.core.model.Token;
 
 /**
- * 用户扫码、确认 的Token
+ * Work WeChat Confirm Token
  * @author kenny.he
  * @since 2022/08/10
  */
