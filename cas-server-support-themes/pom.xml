@@ -15,6 +15,13 @@
             <artifactId>cas-server-core</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-thymeleaf-core</artifactId>
+            <version>${cas.server.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-support-thymeleaf</artifactId>

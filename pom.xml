@@ -21,6 +21,7 @@
         <cas.server.version>7.3.3</cas.server.version>
         <tomcat.version>11.0.15</tomcat.version>
         <spring-boot.version>3.5.6</spring-boot.version>
+        <spring-cloud.version>4.3.0</spring-cloud.version>
     </properties>
 
     <modules>

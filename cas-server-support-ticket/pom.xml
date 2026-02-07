@@ -34,10 +34,10 @@
         </dependency>-->
 
         <!-- Ticket Redis -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-support-redis-ticket-registry</artifactId>
             <version>${cas.server.version}</version>
-        </dependency>
+        </dependency>-->
     </dependencies>
 </project>
