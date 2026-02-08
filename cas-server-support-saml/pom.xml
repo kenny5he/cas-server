@@ -19,6 +19,7 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>cas-server-core</artifactId>
             <version>${project.version}</version>
+            <type>pom</type>
         </dependency>
 
         <!-- SAML -->

@@ -26,13 +26,10 @@
 
     <modules>
         <module>cas-server-core</module>
-        <module>cas-server-authentication</module>
         <module>cas-server-integration</module>
         <module>cas-server-webapp-starter</module>
         <module>cas-server-support-account</module>
         <module>cas-server-support-pm</module>
-        <module>cas-server-support-cookie</module>
-        <module>cas-server-support-session</module>
         <module>cas-server-support-captcha</module>
         <module>cas-server-support-jpa</module>
         <module>cas-server-support-authn</module>

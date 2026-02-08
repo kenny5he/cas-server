@@ -3,11 +3,11 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.microfoolish.it.sso</groupId>
-        <artifactId>cas-server</artifactId>
+        <artifactId>cas-server-core</artifactId>
         <version>7.3.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>cas-server-authentication</artifactId>
+    <artifactId>cas-server-core-authentication</artifactId>
 
     <dependencies>
         <dependency>
@@ -25,6 +25,12 @@
         <dependency>
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-core-authentication</artifactId>
+            <version>${cas.server.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-jdbc-authentication</artifactId>
             <version>${cas.server.version}</version>
         </dependency>
 

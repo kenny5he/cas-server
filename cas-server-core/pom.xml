@@ -8,6 +8,14 @@
     </parent>
 
     <artifactId>cas-server-core</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>cas-server-core-authentication</module>
+        <module>cas-server-core-multitenancy</module>
+        <module>cas-server-core-cookie</module>
+        <module>cas-server-core-session</module>
+    </modules>
 
     <dependencies>
         <dependency>

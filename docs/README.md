@@ -1,9 +1,9 @@
 ## CAS 统一单点登录平台
 ### 代办任务项
-0. 提供验证码功能
-1. 提供注册页面，开发Register Webflow功能。
-2. 开发支持QQ、微信、支付宝对接登录服务。
-3. 集成CAS的邮件、短信、双因子认证服务功能。
+1. 提供验证码功能
+2. 提供注册页面，开发Register Webflow功能。
+3. 开发支持QQ、微信、支付宝对接登录服务。
+4. 集成CAS的邮件、短信、双因子认证服务功能。
 ### CAS原理
 1. 页面访问部分
    1. 默认进入登录页面
@@ -20,6 +20,28 @@
 2. Cas WebFlow 注册编排
     1. CasWebflowContextConfiguration.casWebflowExecutionPlan 中执行plan.execute 执行初始化。
     2. DefaultCasWebflowExecutionPlan.execute 循环CasWebflowConfigurer执行initialize(通过Java方法替代webflow.xml配置流程操作)，将流程动作、参数信息设置到对应的FlowDefinitionRegistry中
+### 认证原理流程
+1. 认证接口 AuthenticationHandler
+    1. 处理接口分类
+        1. 前置后置处理 PrePostAuthenticationHandler 
+        2. 双因子 MultifactorAuthenticationHandler
+    2. 实现方式分类
+        1. Jaas认证: JaasAuthenticationHandler
+        2. Jdbc 用户密码认证: 
+        3. 委托连接认证: DelegatedClientAuthenticationHandler
+    3. 实现类
+        1. Jdbc 认证
+            1.  UserPassword 方式
+                1. QueryDatabaseAuthenticationHandler
+                2. QueryAndEncodeDatabaseAuthenticationHandler
+                3. BindModeSearchDatabaseAuthenticationHandler
+                4. SearchModeSearchDatabaseAuthenticationHandler
+            2. 配置类
+                1. CasJdbcAuthenticationAutoConfiguration
+                2. CasJdbcQueryAuthenticationConfiguration
+                3. CasJdbcQueryEncodeAuthenticationConfiguration
+                4. CasJdbcBindAuthenticationConfiguration
+
 #### TGC/TGG 凭证原理
 1. 生成凭证: CreateTicketGrantingTicketAction
 2. CAS 验证TGC
