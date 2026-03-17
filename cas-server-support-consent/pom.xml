@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>cas-server-support-authn</artifactId>
+    <artifactId>cas-server-support-consent</artifactId>
 
     <dependencies>
 

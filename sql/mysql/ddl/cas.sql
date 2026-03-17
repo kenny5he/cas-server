@@ -1,5 +1,5 @@
 /** create database **/
-CREATE DATABASE cas;
+CREATE DATABASE IF NOT EXISTS cas;
 
 /** create user table **/
 CREATE TABLE IF NOT EXISTS `cas_user` (

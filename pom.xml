@@ -32,7 +32,7 @@
         <module>cas-server-support-pm</module>
         <module>cas-server-support-captcha</module>
         <module>cas-server-support-jpa</module>
-        <module>cas-server-support-authn</module>
+        <module>cas-server-support-consent</module>
         <module>cas-server-support-ticket</module>
         <module>cas-server-support-saml</module>
         <module>cas-server-support-themes</module>
