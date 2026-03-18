@@ -62,7 +62,7 @@
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>cas-server-authentication</artifactId>
+            <artifactId>cas-server-core-authentication</artifactId>
             <version>${project.version}</version>
         </dependency>
         <!-- Notification -->
@@ -87,13 +87,13 @@
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>cas-server-support-cookie</artifactId>
+            <artifactId>cas-server-core-cookie</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>cas-server-support-session</artifactId>
+            <artifactId>cas-server-core-session</artifactId>
             <version>${project.version}</version>
         </dependency>
 
@@ -118,12 +118,6 @@
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>cas-server-support-oauth2</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>cas-server-support-authn</artifactId>
             <version>${project.version}</version>
         </dependency>
 

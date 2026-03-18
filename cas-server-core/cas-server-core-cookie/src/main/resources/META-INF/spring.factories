@@ -1,2 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-    config.com.microfish.it.login.cas.cookie.CustomTicketGrantingCookieAutoConfiguration
