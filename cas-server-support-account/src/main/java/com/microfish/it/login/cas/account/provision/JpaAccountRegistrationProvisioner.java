@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.microfish.it.login.cas.account.config;
+package com.microfish.it.login.cas.account.provision;
 
 import org.apereo.cas.acct.AccountRegistrationRequest;
 import org.apereo.cas.acct.AccountRegistrationResponse;

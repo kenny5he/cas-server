@@ -1,5 +1,5 @@
 /**
- * Copyright 2022 - Ren Jian Yan Huo
+ * Copyright 2026 - Ren Jian Yan Huo
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,7 @@
  * limitations under the License.
  */
 
-package com.microfish.it.login.cas.account.service;
+package com.microfish.it.login.cas.account.config;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-/**
- *
- * @author kenny.he
- * @since 2022/10/06
- */
-public class JpaAccountManagementService implements AccountManagementService {
-    private static final Logger logger = LoggerFactory.getLogger(JpaAccountManagementService.class);
-
-    
-
+public class JpaAccountManagementConfiguration {
 }

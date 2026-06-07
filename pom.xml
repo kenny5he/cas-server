@@ -18,7 +18,7 @@
         <mapstruct.version>1.6.3</mapstruct.version>
         <lombok.version>1.18.42</lombok.version>
         <commons-lang3.version>3.20.0</commons-lang3.version>
-        <cas.server.version>7.3.3</cas.server.version>
+        <cas.server.version>7.3.7</cas.server.version>
         <tomcat.version>11.0.15</tomcat.version>
         <spring-boot.version>3.5.6</spring-boot.version>
         <spring-cloud.version>4.3.0</spring-cloud.version>
@@ -125,4 +125,15 @@
             <url>https://build.shibboleth.net/nexus/content/repositories/releases</url>
         </repository>
     </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>aliyun-repo</id>
+            <url>https://packages.aliyun.com/69319767876b90de1aacdb6e/maven/2628060-release-gwpkg8</url>
+        </repository>
+        <snapshotRepository>
+            <id>aliyun-repo</id>
+            <url>https://packages.aliyun.com/69319767876b90de1aacdb6e/maven/2628060-snapshot-x0npm3</url>
+        </snapshotRepository>
+    </distributionManagement>
 </project>
