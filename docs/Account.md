@@ -6,7 +6,6 @@ https://apereo.github.io/cas/development/registration/Account-Registration-Overv
 ### WebFlow
 1. 注册信息填写(SubmitAccountRegistrationAction)
 
-   
 2. 验证注册Token(ValidateAccountRegistrationTokenAction)
 
 3. 填写密码、密保问题完成注册(FinalizeAccountRegistrationAction)

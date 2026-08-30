@@ -1,1 +1,1 @@
-com.microfish.it.login.cas.cookie.configuration.CustomTicketGrantingCookieAutoConfiguration
+configuration.com.microfish.it.sso.account.cas.cookie.CustomTicketGrantingCookieAutoConfiguration

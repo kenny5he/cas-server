@@ -30,12 +30,6 @@
 
         <dependency>
             <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-jdbc-authentication</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-core-authentication-mfa</artifactId>
             <version>${cas.server.version}</version>
         </dependency>
@@ -44,6 +38,12 @@
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-core-webflow-mfa-api</artifactId>
             <version>${cas.server.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>cas-server-core-api</artifactId>
+            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

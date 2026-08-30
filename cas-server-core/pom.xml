@@ -11,6 +11,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>cas-server-core-api</module>
         <module>cas-server-core-authentication</module>
         <module>cas-server-core-multitenancy</module>
         <module>cas-server-core-cookie</module>
@@ -23,6 +24,7 @@
             <artifactId>spring-cloud-starter-bootstrap</artifactId>
             <version>${spring-cloud.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-core</artifactId>

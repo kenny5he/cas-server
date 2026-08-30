@@ -65,6 +65,7 @@
             <artifactId>cas-server-core-authentication</artifactId>
             <version>${project.version}</version>
         </dependency>
+
         <!-- Notification -->
         <dependency>
             <groupId>${project.groupId}</groupId>
@@ -99,7 +100,19 @@
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>cas-server-support-account</artifactId>
+            <artifactId>cas-server-support-signin-jpa</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>cas-server-support-signup-jpa</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>cas-server-support-profile</artifactId>
             <version>${project.version}</version>
         </dependency>
 

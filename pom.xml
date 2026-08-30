@@ -25,10 +25,14 @@
     </properties>
 
     <modules>
+        <!-- 核心模块 -->
         <module>cas-server-core</module>
-        <module>cas-server-integration</module>
-        <module>cas-server-webapp-starter</module>
-        <module>cas-server-support-account</module>
+        <!-- 登录模块-->
+        <module>cas-server-support-signin</module>
+        <!-- 注册模块-->
+        <module>cas-server-support-signup</module>
+        <!-- 个人资料模块 -->
+        <module>cas-server-support-profile</module>
         <module>cas-server-support-pm</module>
         <module>cas-server-support-captcha</module>
         <module>cas-server-support-jpa</module>
@@ -39,6 +43,8 @@
         <module>cas-server-support-notification</module>
         <module>cas-server-support-audit</module>
         <module>cas-server-support-service-registry</module>
+        <module>cas-server-integration</module>
+        <module>cas-server-webapp-starter</module>
     </modules>
 
     <dependencies>
