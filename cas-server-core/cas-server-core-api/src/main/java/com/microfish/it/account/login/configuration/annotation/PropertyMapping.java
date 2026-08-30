@@ -22,14 +22,18 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Target(ElementType.FIELD)
+@Target({ElementType.FIELD, ElementType.METHOD, ElementType.RECORD_COMPONENT})
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface PropertyMapping {
 
     /**
-     * 配置属性
-     * @return 属性key
+     * Relative property path below the mapping prefix. For example,
+     * {@code crypto.encryption.key} maps
+     * {@code account.registration.crypto.encryption.key} to
+     * {@code cas.account-registration.core.crypto.encryption.key}.
+     *
+     * @return relative property path
      */
     String property();
 }

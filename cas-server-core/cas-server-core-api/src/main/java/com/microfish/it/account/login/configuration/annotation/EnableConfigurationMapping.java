@@ -16,6 +16,9 @@
 
 package com.microfish.it.account.login.configuration.annotation;
 
+import org.springframework.core.annotation.AliasFor;
+import org.springframework.context.annotation.Import;
+
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -25,9 +28,32 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
+@Import(ConfigurationMappingRegistrar.class)
 public @interface EnableConfigurationMapping {
 
+    /**
+     * Base packages to scan. The value form is kept as the conventional alias
+     * for {@link #basePackages()}.
+     */
+    @AliasFor("basePackages")
     String[] value() default {};
 
+    /**
+     * Base packages to scan for {@link ConfigurationPropertiesMapping} types.
+     */
+    @AliasFor("value")
+    String[] basePackages() default {};
+
+    /**
+     * Explicit mapping types. Explicit types take precedence over package
+     * scanning and must be annotated with {@link ConfigurationPropertiesMapping}.
+     */
+    Class<?>[] classes() default {};
+
+    /**
+     * Backwards-compatible spelling used by the first draft of this API.
+     * Prefer {@link #basePackages()} for new code.
+     */
+    @Deprecated
     String[] basePackage() default {};
 }
