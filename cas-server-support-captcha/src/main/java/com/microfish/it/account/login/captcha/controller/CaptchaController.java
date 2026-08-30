@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.microfish.it.accoun.login.captcha.controller;
+package com.microfish.it.account.login.captcha.controller;
 
 import javax.imageio.ImageIO;
 import java.io.IOException;
@@ -24,9 +24,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import com.microfish.it.accoun.login.captcha.Captcha;
-import com.microfish.it.accoun.login.captcha.CaptchaConstant;
-import com.microfish.it.accoun.login.captcha.builder.ICaptchaBuilder;
+import com.microfish.it.account.login.captcha.Captcha;
+import com.microfish.it.account.login.captcha.CaptchaConstant;
+import com.microfish.it.account.login.captcha.builder.ICaptchaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

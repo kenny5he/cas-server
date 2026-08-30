@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.microfish.it.login.pac4j.platform.wechat;
+package com.microfish.it.account.login.authentication.pac4j.platform.wechat;
 
 import lombok.Getter;
 import lombok.Setter;

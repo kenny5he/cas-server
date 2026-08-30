@@ -1,4 +1,4 @@
-package com.microfish.it.login.cas.server;
+package com.microfish.it.account.login.server;
 
 import lombok.NoArgsConstructor;
 import lombok.val;

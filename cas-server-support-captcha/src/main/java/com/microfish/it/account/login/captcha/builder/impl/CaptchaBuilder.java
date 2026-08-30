@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.microfish.it.accoun.login.captcha.builder.impl;
+package com.microfish.it.account.login.captcha.builder.impl;
 
-import com.microfish.it.accoun.login.captcha.Captcha;
-import com.microfish.it.accoun.login.captcha.builder.ICaptchaBuilder;
+import com.microfish.it.account.login.captcha.Captcha;
+import com.microfish.it.account.login.captcha.builder.ICaptchaBuilder;
 import org.springframework.stereotype.Service;
 
 

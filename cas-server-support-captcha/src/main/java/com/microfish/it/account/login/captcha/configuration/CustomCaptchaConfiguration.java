@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.microfish.it.accoun.login.captcha.configuration;
+package com.microfish.it.account.login.captcha.configuration;
 
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Configuration;

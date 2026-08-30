@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.microfish.it.login.saml.configuration;
+package com.microfish.it.account.login.saml.configuration;
 
 import jakarta.annotation.PostConstruct;
 

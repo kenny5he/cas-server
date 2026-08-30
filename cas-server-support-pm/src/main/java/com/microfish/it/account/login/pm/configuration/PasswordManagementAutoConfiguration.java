@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.microfish.it.login.cas.pm.configuration;
+package com.microfish.it.account.login.pm.configuration;
 
 import org.apereo.cas.configuration.CasConfigurationProperties;
 import org.slf4j.Logger;

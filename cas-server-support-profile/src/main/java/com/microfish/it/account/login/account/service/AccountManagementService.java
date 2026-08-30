@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.microfish.it.login.cas.account.service;
+package com.microfish.it.account.login.account.service;
 
 /**
  * @author kenny.he

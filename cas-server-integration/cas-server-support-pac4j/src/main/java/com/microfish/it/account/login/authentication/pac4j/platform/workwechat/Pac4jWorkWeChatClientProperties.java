@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.microfish.it.login.pac4j.platform.workwechat;
+package com.microfish.it.account.login.authentication.pac4j.platform.workwechat;
 
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.apereo.cas.configuration.model.support.pac4j.Pac4jIdentifiableClientProperties;
 
-import com.microfish.it.login.pac4j.platform.workwechat.client.WorkWechatClient;
+import com.microfish.it.account.login.authentication.pac4j.platform.workwechat.client.WorkWechatClient;
 
 /**
  * 企业微信

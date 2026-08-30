@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.microfish.it.login.cas.account.service;
+package com.microfish.it.account.login.account.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.microfish.it.accoun.login.captcha;
+package com.microfish.it.account.login.captcha;
 
 /**
  * 验证码

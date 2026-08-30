@@ -147,20 +147,7 @@ public class ConfigurationMappingRegistrar
     private void registerInfrastructureBeans(AnnotationMetadata importingMetadata,
                                              Set<String> resourceClassNames,
                                              BeanDefinitionRegistry registry) {
-        registerIfMissing(PropertiesMappingRegistry.OPERATION_REGISTRY_BEAN_NAME, DefaultListablePropertiesMappingFactory.class, registry);
-        if (resourceClassNames.isEmpty()) {
-            return;
-        }
 
-        String collectorBeanName = METADATA_COLLECTOR_BEAN_NAME + importingMetadata.getClassName();
-        if (!registry.containsBeanDefinition(collectorBeanName)) {
-            BeanDefinition definition = BeanDefinitionBuilder
-                    .genericBeanDefinition(PropertiesMappingMetadataCollector.class)
-                    .addConstructorArgValue(new ArrayList<>(resourceClassNames))
-                    .getBeanDefinition();
-            definition.setRole(BeanDefinition.ROLE_INFRASTRUCTURE);
-            registry.registerBeanDefinition(collectorBeanName, definition);
-        }
     }
 
     private void registerIfMissing(String beanName, Class<?> beanClass, BeanDefinitionRegistry registry) {

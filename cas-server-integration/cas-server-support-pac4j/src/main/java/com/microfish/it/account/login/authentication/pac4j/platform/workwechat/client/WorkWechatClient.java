@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package com.microfish.it.login.pac4j.platform.workwechat.client;
+package com.microfish.it.account.login.authentication.pac4j.platform.workwechat.client;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.pac4j.oauth.client.OAuth20Client;
 
-import com.microfish.it.login.pac4j.platform.workwechat.scribe.api.WorkWechatApi;
-import com.microfish.it.login.pac4j.platform.workwechat.profile.WorkWechatProfileCreator;
-import com.microfish.it.login.pac4j.platform.workwechat.profile.WorkWechatProfileDefinition;
+import com.microfish.it.account.login.authentication.pac4j.platform.workwechat.scribe.api.WorkWechatApi;
+import com.microfish.it.account.login.authentication.pac4j.platform.workwechat.profile.WorkWechatProfileCreator;
+import com.microfish.it.account.login.authentication.pac4j.platform.workwechat.profile.WorkWechatProfileDefinition;
 
 /**
  * 企业微信

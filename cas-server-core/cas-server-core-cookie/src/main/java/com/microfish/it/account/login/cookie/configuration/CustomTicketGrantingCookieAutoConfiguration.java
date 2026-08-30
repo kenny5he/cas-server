@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.microfish.it.sso.account.cas.cookie.configuration;
+package com.microfish.it.account.login.cookie.configuration;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

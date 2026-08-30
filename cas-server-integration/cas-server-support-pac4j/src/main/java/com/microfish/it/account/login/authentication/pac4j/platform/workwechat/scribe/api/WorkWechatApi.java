@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.microfish.it.login.pac4j.platform.workwechat.scribe.api;
+package com.microfish.it.account.login.authentication.pac4j.platform.workwechat.scribe.api;
 
 import java.io.OutputStream;
 import java.util.Map;
@@ -33,9 +33,9 @@ import com.github.scribejava.core.oauth2.bearersignature.BearerSignatureURIQuery
 import com.github.scribejava.core.oauth2.clientauthentication.ClientAuthentication;
 import com.github.scribejava.core.oauth2.clientauthentication.RequestBodyAuthenticationScheme;
 
-import com.microfish.it.login.pac4j.platform.workwechat.client.WorkWechatClient;
-import com.microfish.it.login.pac4j.platform.workwechat.scribe.extractors.WorkWechatJsonExtractor;
-import com.microfish.it.login.pac4j.platform.workwechat.scribe.service.WorkWechatService;
+import com.microfish.it.account.login.authentication.pac4j.platform.workwechat.client.WorkWechatClient;
+import com.microfish.it.account.login.authentication.pac4j.platform.workwechat.scribe.extractors.WorkWechatJsonExtractor;
+import com.microfish.it.account.login.authentication.pac4j.platform.workwechat.scribe.service.WorkWechatService;
 
 /**
  * 企业微信Api

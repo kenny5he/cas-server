@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-package com.microfish.it.accoun.login.captcha.builder;
+package com.microfish.it.account.login.captcha.builder;
 
-import com.microfish.it.accoun.login.captcha.Captcha;
+import com.microfish.it.account.login.captcha.Captcha;
 
 /**
  * @author kenny.he

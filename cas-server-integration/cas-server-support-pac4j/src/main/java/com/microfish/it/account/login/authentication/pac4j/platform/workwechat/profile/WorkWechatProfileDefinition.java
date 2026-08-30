@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.microfish.it.login.pac4j.platform.workwechat.profile;
+package com.microfish.it.account.login.authentication.pac4j.platform.workwechat.profile;
 
 import org.pac4j.oauth.config.OAuthConfiguration;
 import org.pac4j.oauth.profile.wechat.WechatProfileDefinition;
@@ -23,7 +23,7 @@ import com.github.scribejava.core.exceptions.OAuthException;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.github.scribejava.core.model.Token;
 
-import com.microfish.it.login.pac4j.platform.workwechat.scribe.model.WorkWechatTicketToken;
+import com.microfish.it.account.login.authentication.pac4j.platform.workwechat.scribe.model.WorkWechatTicketToken;
 
 /**
  * 企业微信 User Profile Definition

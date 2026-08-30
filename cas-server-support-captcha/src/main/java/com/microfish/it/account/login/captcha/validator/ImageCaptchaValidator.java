@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.microfish.it.accoun.login.captcha.validator;
+package com.microfish.it.account.login.captcha.validator;
 
 import jakarta.servlet.http.HttpServletRequest;
 

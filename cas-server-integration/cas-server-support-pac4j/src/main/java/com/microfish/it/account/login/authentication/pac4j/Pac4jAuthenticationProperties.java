@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.microfish.it.login.pac4j;
+package com.microfish.it.account.login.authentication.pac4j;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,8 +25,8 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
 
 import org.apereo.cas.configuration.model.support.pac4j.Pac4jDelegatedAuthenticationProperties;
 
-import com.microfish.it.login.pac4j.platform.wechat.Pac4jWeChatClientProperties;
-import com.microfish.it.login.pac4j.platform.workwechat.Pac4jWorkWeChatClientProperties;
+import com.microfish.it.account.login.authentication.pac4j.platform.wechat.Pac4jWeChatClientProperties;
+import com.microfish.it.account.login.authentication.pac4j.platform.workwechat.Pac4jWorkWeChatClientProperties;
 
 /**
  * 客制化

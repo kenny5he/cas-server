@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.microfish.it.login.pac4j.platform.alipay;
+package com.microfish.it.account.login.authentication.pac4j.platform.alipay;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.microfish.it.login.pac4j.platform.workwechat.scribe.service;
+package com.microfish.it.account.login.authentication.pac4j.platform.workwechat.scribe.service;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
@@ -31,8 +31,8 @@ import com.github.scribejava.core.model.OAuthAsyncRequestCallback;
 import com.github.scribejava.core.model.OAuthRequest;
 import com.github.scribejava.core.model.Response;
 import com.github.scribejava.core.oauth.AccessTokenRequestParams;
-import com.microfish.it.login.pac4j.platform.workwechat.scribe.extractors.WorkWechatJsonExtractor;
-import com.microfish.it.login.pac4j.platform.workwechat.scribe.model.WorkWechatConfirmCode;
+import com.microfish.it.account.login.authentication.pac4j.platform.workwechat.scribe.extractors.WorkWechatJsonExtractor;
+import com.microfish.it.account.login.authentication.pac4j.platform.workwechat.scribe.model.WorkWechatConfirmCode;
 
 
 /**

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.microfish.it.login.pac4j.platform.workwechat.scribe.model;
+package com.microfish.it.account.login.authentication.pac4j.platform.workwechat.scribe.model;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
