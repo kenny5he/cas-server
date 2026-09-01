@@ -1,0 +1,26 @@
+div#content {
+    box-shadow: none;
+}
+#login-card {
+    max-width: 500px;
+}
+#qrlogin .card-body .card-text>div>img {
+    padding: 0 4rem;
+}
+#login-button {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
+    gap: 5%;
+    .mdc-button {
+        min-width: 40%;
+    }
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+}

@@ -1,0 +1,17 @@
+server:
+  port: 443
+  servlet:
+    context-path=/cas
+  ssl:
+    key-store: classpath:login.microfoolish.com.jks
+    key-store-password: 9BGfqk9I
+    key-store-type: JKS
+    enabled: true
+spring:
+  datasource:
+    url: jdbc:postgresql://47.107.152.2:5432/account
+    username: login
+    password: login-pg$123
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect

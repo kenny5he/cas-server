@@ -23,5 +23,19 @@
             <artifactId>cas-server-support-jpa-hibernate</artifactId>
             <version>${cas.server.version}</version>
         </dependency>
+
+        <!-- JPA Util -->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-jpa-util</artifactId>
+            <version>${cas.server.version}</version>
+        </dependency>
+
+        <!-- Spring Boot Data JPA -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
     </dependencies>
 </project>

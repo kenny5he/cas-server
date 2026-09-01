@@ -19,17 +19,17 @@
             <type>war</type>
         </dependency>-->
 
+        <!-- CAS Server Webapp Config Resources -->
+        <!--<dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-webapp-resources</artifactId>
+            <version>${cas.server.version}</version>
+        </dependency>-->
+
         <!-- Cas Server Webapp  -->
         <dependency>
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-webapp-init</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
-        <!-- CAS Server Webapp Resources -->
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-webapp-resources</artifactId>
             <version>${cas.server.version}</version>
         </dependency>
 

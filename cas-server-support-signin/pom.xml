@@ -14,6 +14,7 @@
     <modules>
         <module>cas-server-support-signin-jdbc</module>
         <module>cas-server-support-signin-jpa</module>
+        <module>cas-server-support-signin-api</module>
     </modules>
 
     <dependencies>

@@ -14,9 +14,20 @@
     <modules>
         <module>cas-server-support-signup-jpa</module>
         <module>cas-server-support-signup-jdbc</module>
+        <module>cas-server-support-signup-api</module>
     </modules>
 
     <dependencies>
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-account-mgmt-api</artifactId>
+            <version>${cas.server.version}</version>
+        </dependency>
 
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-account-mgmt</artifactId>
+            <version>${cas.server.version}</version>
+        </dependency>
     </dependencies>
 </project>

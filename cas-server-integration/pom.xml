@@ -13,6 +13,7 @@
     <modules>
         <module>cas-server-support-oauth2</module>
         <module>cas-server-support-pac4j</module>
+        <module>cas-server-support-oidc</module>
     </modules>
 
     <dependencies>

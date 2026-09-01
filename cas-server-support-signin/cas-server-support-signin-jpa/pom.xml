@@ -11,5 +11,16 @@
   <name>cas-server-support-signin-jpa</name>
 
   <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>cas-server-support-jpa</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>cas-server-support-signin-api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
   </dependencies>
 </project>

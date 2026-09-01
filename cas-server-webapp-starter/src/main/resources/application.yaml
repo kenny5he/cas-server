@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: cas
+  profiles:
+    active: standalone
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:mysql://db.mysql.Laf1j8Y6Bd.microfish.com:23306/cas
+    username: root
+    password: dmt.123
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQLDialect
+  mail:
+    host: smtp.qq.com
+    port: 587
+    username: 923662064@qq.com
+    password: fweimyvpdyqcbcjj
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          connectiontimeout: 5000
+          timeout: 3000
+          writetimeout: 5000
+          socketFactoryClass: javax.net.ssl.SSLSocketFactory
+          debug: true
