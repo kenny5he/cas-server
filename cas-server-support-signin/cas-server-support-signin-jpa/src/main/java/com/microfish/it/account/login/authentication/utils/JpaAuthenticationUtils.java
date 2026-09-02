@@ -16,11 +16,11 @@
 
 package com.microfish.it.account.login.authentication.utils;
 
+import jakarta.persistence.EntityManagerFactory;
+
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
-
-import javax.sql.DataSource;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -28,6 +28,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 import org.apereo.cas.authentication.AuthenticationHandler;
 import org.apereo.cas.authentication.CoreAuthenticationUtils;
+import org.apereo.cas.authentication.handler.support.AbstractUsernamePasswordAuthenticationHandler;
 import org.apereo.cas.authentication.principal.PrincipalFactory;
 import org.apereo.cas.authentication.principal.PrincipalNameTransformerUtils;
 import org.apereo.cas.configuration.support.JpaBeans;
@@ -40,23 +41,23 @@ import org.apereo.cas.configuration.model.support.jdbc.authn.QueryEncodeJdbcAuth
 import org.apereo.cas.configuration.model.support.jdbc.authn.QueryJdbcAuthenticationProperties;
 import org.apereo.cas.configuration.model.support.jdbc.authn.SearchJdbcAuthenticationProperties;
 
-import com.microfish.it.account.login.authentication.handler.AbstractJpaUsernamePasswordAuthenticationHandler;
 import com.microfish.it.account.login.authentication.handler.BindModeSearchDatabaseAuthenticationHandler;
 import com.microfish.it.account.login.authentication.handler.QueryAndEncodeDatabaseAuthenticationHandler;
 import com.microfish.it.account.login.authentication.handler.QueryAndEncodeDatabasePasswordEncoder;
 import com.microfish.it.account.login.authentication.handler.QueryDatabaseAuthenticationHandler;
 import com.microfish.it.account.login.authentication.handler.SearchModeSearchDatabaseAuthenticationHandler;
 import com.microfish.it.account.login.authentication.handler.StoredProcedureAuthenticationHandler;
+import com.microfish.it.account.login.authentication.repository.AccountRepository;
 
 /**
- * A JDBC utility class.
+ * Authentication handler factory for the JPA-backed sign-in module.
  *
  * @author Jerome LELEU
  * @since 7.0.0
  */
 @UtilityClass
 @Slf4j
-public class JdbcAuthenticationUtils {
+public class JpaAuthenticationUtils {
 
     /**
      * Configure a JDBC authentication handler.
@@ -66,7 +67,7 @@ public class JdbcAuthenticationUtils {
      * @param properties         the JDBC properties
      * @param applicationContext the application context
      */
-    public static void configureJdbcAuthenticationHandler(final AbstractJpaUsernamePasswordAuthenticationHandler handler,
+    public static void configureJdbcAuthenticationHandler(final AbstractUsernamePasswordAuthenticationHandler handler,
                                                           final PasswordPolicyContext config,
                                                           final BaseJdbcAuthenticationProperties properties,
                                                           final ConfigurableApplicationContext applicationContext) {
@@ -113,7 +114,7 @@ public class JdbcAuthenticationUtils {
                                                                  final PrincipalFactory jdbcPrincipalFactory,
                                                                  final PasswordPolicyContext queryAndEncodePasswordPolicyConfiguration) {
         return newAuthenticationHandler(properties, applicationContext, jdbcPrincipalFactory,
-            queryAndEncodePasswordPolicyConfiguration, JpaBeans.newDataSource(properties));
+            queryAndEncodePasswordPolicyConfiguration, applicationContext.getBean(AccountRepository.class));
     }
 
     /**
@@ -123,17 +124,17 @@ public class JdbcAuthenticationUtils {
      * @param applicationContext                        the application context
      * @param jdbcPrincipalFactory                      the jdbc principal factory
      * @param queryAndEncodePasswordPolicyConfiguration the query and encode password policy configuration
-     * @param dataSource                                the data source
+     * @param accountRepository                         the account repository
      * @return the authentication handler
      */
     public static AuthenticationHandler newAuthenticationHandler(final QueryEncodeJdbcAuthenticationProperties properties,
                                                                  final ConfigurableApplicationContext applicationContext,
                                                                  final PrincipalFactory jdbcPrincipalFactory,
                                                                  final PasswordPolicyContext queryAndEncodePasswordPolicyConfiguration,
-                                                                 final DataSource dataSource) {
+                                                                 final AccountRepository accountRepository) {
         val databasePasswordEncoder = new QueryAndEncodeDatabasePasswordEncoder(properties);
         val handler = new QueryAndEncodeDatabaseAuthenticationHandler(properties,
-            jdbcPrincipalFactory, dataSource, databasePasswordEncoder);
+            jdbcPrincipalFactory, accountRepository, databasePasswordEncoder);
         configureJdbcAuthenticationHandler(handler, queryAndEncodePasswordPolicyConfiguration, properties, applicationContext);
         return handler;
     }
@@ -151,8 +152,27 @@ public class JdbcAuthenticationUtils {
                                                                  final ConfigurableApplicationContext applicationContext,
                                                                  final PrincipalFactory jdbcPrincipalFactory,
                                                                  final PasswordPolicyContext queryPasswordPolicyConfiguration) {
+        return newAuthenticationHandler(properties, applicationContext, jdbcPrincipalFactory,
+            queryPasswordPolicyConfiguration, applicationContext.getBean(AccountRepository.class));
+    }
 
-        val handler = new QueryDatabaseAuthenticationHandler(properties, jdbcPrincipalFactory, JpaBeans.newDataSource(properties));
+    /**
+     * New JPA query authentication handler.
+     *
+     * @param properties                       the query properties
+     * @param applicationContext               the application context
+     * @param jdbcPrincipalFactory             the principal factory
+     * @param queryPasswordPolicyConfiguration the password policy configuration
+     * @param accountRepository                the Spring Data JPA repository
+     * @return the authentication handler
+     */
+    public static AuthenticationHandler newAuthenticationHandler(final QueryJdbcAuthenticationProperties properties,
+                                                                 final ConfigurableApplicationContext applicationContext,
+                                                                 final PrincipalFactory jdbcPrincipalFactory,
+                                                                 final PasswordPolicyContext queryPasswordPolicyConfiguration,
+                                                                 final AccountRepository accountRepository) {
+
+        val handler = new QueryDatabaseAuthenticationHandler(properties, jdbcPrincipalFactory, accountRepository);
         configureJdbcAuthenticationHandler(handler, queryPasswordPolicyConfiguration, properties, applicationContext);
         return handler;
     }
@@ -170,8 +190,26 @@ public class JdbcAuthenticationUtils {
                                                                  final ConfigurableApplicationContext applicationContext,
                                                                  final PrincipalFactory jdbcPrincipalFactory,
                                                                  final PasswordPolicyContext searchModePasswordPolicyConfiguration) {
-        val handler = new SearchModeSearchDatabaseAuthenticationHandler(properties,
-            jdbcPrincipalFactory, JpaBeans.newDataSource(properties));
+        return newAuthenticationHandler(properties, applicationContext, jdbcPrincipalFactory,
+            searchModePasswordPolicyConfiguration, applicationContext.getBean(AccountRepository.class));
+    }
+
+    /**
+     * New JPA search authentication handler.
+     *
+     * @param properties                            the search properties
+     * @param applicationContext                    the application context
+     * @param jdbcPrincipalFactory                  the principal factory
+     * @param searchModePasswordPolicyConfiguration the password policy configuration
+     * @param accountRepository                     the Spring Data JPA repository
+     * @return the authentication handler
+     */
+    public static AuthenticationHandler newAuthenticationHandler(final SearchJdbcAuthenticationProperties properties,
+                                                                 final ConfigurableApplicationContext applicationContext,
+                                                                 final PrincipalFactory jdbcPrincipalFactory,
+                                                                 final PasswordPolicyContext searchModePasswordPolicyConfiguration,
+                                                                 final AccountRepository accountRepository) {
+        val handler = new SearchModeSearchDatabaseAuthenticationHandler(properties, jdbcPrincipalFactory, accountRepository);
         configureJdbcAuthenticationHandler(handler, searchModePasswordPolicyConfiguration, properties, applicationContext);
         return handler;
     }
@@ -189,8 +227,26 @@ public class JdbcAuthenticationUtils {
                                                                  final ConfigurableApplicationContext applicationContext,
                                                                  final PrincipalFactory jdbcPrincipalFactory,
                                                                  final PasswordPolicyContext searchModePasswordPolicyConfiguration) {
-        val handler = new StoredProcedureAuthenticationHandler(properties,
-            jdbcPrincipalFactory, JpaBeans.newDataSource(properties));
+        return newAuthenticationHandler(properties, applicationContext, jdbcPrincipalFactory,
+            searchModePasswordPolicyConfiguration, applicationContext.getBean(EntityManagerFactory.class));
+    }
+
+    /**
+     * New JPA procedure-compatible authentication handler.
+     *
+     * @param properties                            the procedure properties
+     * @param applicationContext                    the application context
+     * @param jdbcPrincipalFactory                  the principal factory
+     * @param searchModePasswordPolicyConfiguration the password policy configuration
+     * @param entityManagerFactory                  the JPA entity manager factory
+     * @return the authentication handler
+     */
+    public static AuthenticationHandler newAuthenticationHandler(final ProcedureJdbcAuthenticationProperties properties,
+                                                                 final ConfigurableApplicationContext applicationContext,
+                                                                 final PrincipalFactory jdbcPrincipalFactory,
+                                                                 final PasswordPolicyContext searchModePasswordPolicyConfiguration,
+                                                                 final EntityManagerFactory entityManagerFactory) {
+        val handler = new StoredProcedureAuthenticationHandler(properties, jdbcPrincipalFactory, entityManagerFactory);
         configureJdbcAuthenticationHandler(handler, searchModePasswordPolicyConfiguration, properties, applicationContext);
         return handler;
     }

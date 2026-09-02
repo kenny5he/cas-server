@@ -10,13 +10,6 @@
     <artifactId>cas-server-support-jpa</artifactId>
 
     <dependencies>
-        <!-- JDBC -->
-        <dependency>
-            <groupId>org.apereo.cas</groupId>
-            <artifactId>cas-server-support-jdbc</artifactId>
-            <version>${cas.server.version}</version>
-        </dependency>
-
         <!-- JPA Hibernate-->
         <dependency>
             <groupId>org.apereo.cas</groupId>

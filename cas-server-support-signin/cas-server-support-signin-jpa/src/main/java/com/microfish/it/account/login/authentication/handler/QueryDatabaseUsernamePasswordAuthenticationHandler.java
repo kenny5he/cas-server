@@ -16,14 +16,15 @@
 
 package com.microfish.it.account.login.authentication.handler;
 
+import com.microfish.it.account.login.authentication.repository.AccountRepository;
 import org.apereo.cas.authentication.principal.PrincipalFactory;
 import org.apereo.cas.configuration.model.support.jdbc.authn.QueryJdbcAuthenticationProperties;
 
-import javax.sql.DataSource;
-
 public class QueryDatabaseUsernamePasswordAuthenticationHandler extends AbstractJpaUsernamePasswordAuthenticationHandler<QueryJdbcAuthenticationProperties> {
 
-    protected QueryDatabaseUsernamePasswordAuthenticationHandler(QueryJdbcAuthenticationProperties properties, PrincipalFactory principalFactory, DataSource dataSource) {
-        super(properties, principalFactory, dataSource);
+    protected QueryDatabaseUsernamePasswordAuthenticationHandler(final QueryJdbcAuthenticationProperties properties,
+                                                                 final PrincipalFactory principalFactory,
+                                                                 final AccountRepository accountRepository) {
+        super(properties, principalFactory, accountRepository);
     }
 }

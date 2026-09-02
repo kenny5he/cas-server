@@ -16,7 +16,6 @@
 
 package com.microfish.it.account.login.authentication.config;
 
-import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 
 import java.util.Collection;
@@ -32,8 +31,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ScopedProxyMode;
 
-import org.apereo.cas.services.ServicesManager;
-import org.apereo.cas.util.spring.boot.ConditionalOnFeatureEnabled;
+import org.apereo.cas.authentication.AuthenticationEventExecutionPlanConfigurer;
 import org.apereo.cas.authentication.AuthenticationHandler;
 import org.apereo.cas.authentication.principal.PrincipalFactory;
 import org.apereo.cas.authentication.principal.PrincipalFactoryUtils;
@@ -41,71 +39,66 @@ import org.apereo.cas.authentication.principal.PrincipalResolver;
 import org.apereo.cas.authentication.support.password.PasswordPolicyContext;
 import org.apereo.cas.configuration.CasConfigurationProperties;
 import org.apereo.cas.configuration.features.CasFeatureModule;
-import org.apereo.cas.authentication.AuthenticationEventExecutionPlanConfigurer;
+import org.apereo.cas.services.ServicesManager;
+import org.apereo.cas.util.spring.boot.ConditionalOnFeatureEnabled;
 
-import com.microfish.it.account.login.authentication.utils.JpaAuthenticationUtils;
 import com.microfish.it.account.login.authentication.repository.AccountRepository;
+import com.microfish.it.account.login.authentication.utils.JpaAuthenticationUtils;
 
 /**
- * This is {@link CasJpaQueryEncodeAuthenticationConfiguration}.
- *
- * @author Misagh Moayyed
- * @author Dmitriy Kopylenko
- * @since 7.2.0
+ * Configures search-mode authentication backed by Spring Data JPA.
  */
 @EnableConfigurationProperties(CasConfigurationProperties.class)
-@Slf4j
 @ConditionalOnFeatureEnabled(feature = CasFeatureModule.FeatureCatalog.Authentication, module = "jpa")
-@Configuration(value = "CasJpaQueryEncodeAuthenticationConfiguration", proxyBeanMethods = false)
+@Configuration(value = "CasJpaSearchAuthenticationConfiguration", proxyBeanMethods = false)
 @Import(CasSigninJpaDataConfiguration.class)
-class CasJpaQueryEncodeAuthenticationConfiguration {
+class CasJpaSearchAuthenticationConfiguration {
 
-    @ConditionalOnMissingBean(name = "queryAndEncodeDatabaseAuthenticationHandlers")
+    @ConditionalOnMissingBean(name = "searchModeAuthenticationHandlers")
     @Bean
     @RefreshScope(proxyMode = ScopedProxyMode.DEFAULT)
-    public Collection<AuthenticationHandler> queryAndEncodeDatabaseAuthenticationHandlers(
-        @Qualifier("queryAndEncodePasswordPolicyConfiguration")
-        final PasswordPolicyContext queryAndEncodePasswordPolicyConfiguration,
+    public Collection<AuthenticationHandler> searchModeAuthenticationHandlers(
+        @Qualifier("searchModePasswordPolicyConfiguration")
+        final PasswordPolicyContext passwordPolicyConfiguration,
         final ConfigurableApplicationContext applicationContext,
         @Qualifier(ServicesManager.BEAN_NAME)
         final ServicesManager servicesManager,
-        @Qualifier("queryAndEncodePrincipalFactory")
-        final PrincipalFactory jdbcPrincipalFactory,
+        @Qualifier("searchModePrincipalFactory")
+        final PrincipalFactory principalFactory,
         final AccountRepository accountRepository,
         final CasConfigurationProperties casProperties) {
         val handlers = new HashSet<AuthenticationHandler>();
-        val jdbc = casProperties.getAuthn().getJdbc();
-        jdbc.getEncode().forEach(properties -> {
+        casProperties.getAuthn().getJdbc().getSearch().forEach(properties -> {
             val handler = JpaAuthenticationUtils.newAuthenticationHandler(properties, applicationContext,
-                jdbcPrincipalFactory, queryAndEncodePasswordPolicyConfiguration, accountRepository);
+                principalFactory, passwordPolicyConfiguration, accountRepository);
             handlers.add(handler);
         });
         return handlers;
     }
 
-    @ConditionalOnMissingBean(name = "queryAndEncodePrincipalFactory")
+    @ConditionalOnMissingBean(name = "searchModePrincipalFactory")
     @Bean
     @RefreshScope(proxyMode = ScopedProxyMode.DEFAULT)
-    public PrincipalFactory queryAndEncodePrincipalFactory() {
+    public PrincipalFactory searchModePrincipalFactory() {
         return PrincipalFactoryUtils.newPrincipalFactory();
     }
 
-    @ConditionalOnMissingBean(name = "queryAndEncodePasswordPolicyConfiguration")
+    @ConditionalOnMissingBean(name = "searchModePasswordPolicyConfiguration")
     @Bean
     @RefreshScope(proxyMode = ScopedProxyMode.DEFAULT)
-    public PasswordPolicyContext queryAndEncodePasswordPolicyConfiguration() {
+    public PasswordPolicyContext searchModePasswordPolicyConfiguration() {
         return new PasswordPolicyContext();
     }
 
-    @ConditionalOnMissingBean(name = "queryAndEncodeAuthenticationEventExecutionPlanConfigurer")
+    @ConditionalOnMissingBean(name = "searchModeAuthenticationEventExecutionPlanConfigurer")
     @Bean
     @RefreshScope(proxyMode = ScopedProxyMode.DEFAULT)
-    public AuthenticationEventExecutionPlanConfigurer queryAndEncodeAuthenticationEventExecutionPlanConfigurer(
-        @Qualifier("queryAndEncodeDatabaseAuthenticationHandlers")
-        final Collection<AuthenticationHandler> queryAndEncodeDatabaseAuthenticationHandlers,
+    public AuthenticationEventExecutionPlanConfigurer searchModeAuthenticationEventExecutionPlanConfigurer(
+        @Qualifier("searchModeAuthenticationHandlers")
+        final Collection<AuthenticationHandler> authenticationHandlers,
         @Qualifier(PrincipalResolver.BEAN_NAME_PRINCIPAL_RESOLVER)
         final PrincipalResolver defaultPrincipalResolver) {
-        return plan -> queryAndEncodeDatabaseAuthenticationHandlers.forEach(h ->
-            plan.registerAuthenticationHandlerWithPrincipalResolver(h, defaultPrincipalResolver));
+        return plan -> authenticationHandlers.forEach(handler ->
+            plan.registerAuthenticationHandlerWithPrincipalResolver(handler, defaultPrincipalResolver));
     }
 }

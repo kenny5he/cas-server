@@ -47,14 +47,14 @@ import com.microfish.it.account.login.authentication.handler.TenantJpaAuthentica
 @EnableConfigurationProperties(CasConfigurationProperties.class)
 @Slf4j
 @ConditionalOnFeatureEnabled(feature = CasFeatureModule.FeatureCatalog.Authentication, module = "jpa")
-@Configuration(value = "CasJdbcMultitenancyConfiguration", proxyBeanMethods = false)
+@Configuration(value = "CasJpaAuthenticationMultitenancyConfiguration", proxyBeanMethods = false)
 class CasJpaAuthenticationMultitenancyConfiguration {
 
     @Configuration(value = "CasJpaMultitenancyAuthenticationHandlersConfiguration", proxyBeanMethods = false)
     @ConditionalOnFeatureEnabled(feature = CasFeatureModule.FeatureCatalog.Multitenancy)
     @EnableConfigurationProperties(CasConfigurationProperties.class)
-    static class CasJdbcMultitenancyAuthenticationHandlersConfiguration {
-        @ConditionalOnMissingBean(name = "jdbcMultitenancyAuthenticationPlanConfigurer")
+    static class CasJpaMultitenancyAuthenticationHandlersConfiguration {
+        @ConditionalOnMissingBean(name = "jpaMultitenancyAuthenticationPlanConfigurer")
         @Bean
         @RefreshScope(proxyMode = ScopedProxyMode.DEFAULT)
         public AuthenticationEventExecutionPlanConfigurer jpaMultitenancyAuthenticationPlanConfigurer(

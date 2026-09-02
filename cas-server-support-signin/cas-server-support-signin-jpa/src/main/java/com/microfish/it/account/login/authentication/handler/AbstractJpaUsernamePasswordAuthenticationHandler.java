@@ -19,46 +19,59 @@ package com.microfish.it.account.login.authentication.handler;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
+
+import javax.security.auth.login.AccountExpiredException;
+import javax.security.auth.login.AccountNotFoundException;
+import javax.security.auth.login.FailedLoginException;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Strings;
+
 import org.apereo.cas.authentication.AuthenticationHandlerExecutionResult;
 import org.apereo.cas.authentication.CoreAuthenticationUtils;
+import org.apereo.cas.authentication.PreventedException;
 import org.apereo.cas.authentication.credential.UsernamePasswordCredential;
+import org.apereo.cas.authentication.exceptions.AccountDisabledException;
 import org.apereo.cas.authentication.handler.support.AbstractUsernamePasswordAuthenticationHandler;
 import org.apereo.cas.authentication.principal.PrincipalFactory;
 import org.apereo.cas.configuration.model.support.jdbc.authn.BaseJdbcAuthenticationProperties;
 import org.apereo.cas.util.CollectionUtils;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
-import javax.sql.DataSource;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 
+import com.microfish.it.account.login.authentication.entity.AccountEntity;
+import com.microfish.it.account.login.authentication.repository.AccountRepository;
+
+/**
+ * Base username/password handler backed by the application's Spring Data JPA repository.
+ * The logical CAS username is resolved against {@link AccountEntity#getCode()}.
+ */
 @Getter
 @Slf4j
-public class AbstractJpaUsernamePasswordAuthenticationHandler<T extends BaseJdbcAuthenticationProperties> extends AbstractUsernamePasswordAuthenticationHandler {
+public abstract class AbstractJpaUsernamePasswordAuthenticationHandler<T extends BaseJdbcAuthenticationProperties>
+    extends AbstractUsernamePasswordAuthenticationHandler {
 
     protected final T properties;
 
-    protected final JdbcTemplate jdbcTemplate;
-
-    protected final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-
-    protected final DataSource dataSource;
+    protected final AccountRepository accountRepository;
 
     protected AbstractJpaUsernamePasswordAuthenticationHandler(final T properties,
                                                                 final PrincipalFactory principalFactory,
-                                                                final DataSource dataSource) {
+                                                                final AccountRepository accountRepository) {
         super(properties.getName(), principalFactory, properties.getOrder());
         this.properties = properties;
-        this.dataSource = dataSource;
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
-        this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
+        this.accountRepository = accountRepository;
     }
 
-
     protected Map<String, List<Object>> collectPrincipalAttributes(final Map<String, Object> dbFields) {
-        val attributes = new HashMap<String, List<Object>>();
+        val attributes = new LinkedHashMap<String, List<Object>>();
         val principalAttributeMap = CoreAuthenticationUtils.transformPrincipalAttributesListIntoMultiMap(properties.getPrincipalAttributeList());
         principalAttributeMap.forEach((key, names) -> {
             val attribute = dbFields.get(key);
@@ -76,8 +89,79 @@ public class AbstractJpaUsernamePasswordAuthenticationHandler<T extends BaseJdbc
         return attributes;
     }
 
+    protected AccountEntity findAccount(final String username) throws AccountNotFoundException {
+        return accountRepository.findByUsername(username)
+            .orElseThrow(() -> new AccountNotFoundException(username + " not found with JPA query"));
+    }
+
+    protected void verifyAccountStatus(final AccountEntity account) throws AccountDisabledException, AccountExpiredException {
+        if (account.getExpired() != 0) {
+            throw new AccountDisabledException("Account has been disabled");
+        }
+
+        val now = LocalDateTime.now();
+        if (account.getEffectiveTime() != null && now.isBefore(account.getEffectiveTime())) {
+            throw new AccountDisabledException("Account is not effective yet");
+        }
+        if (account.getExpirationTime() != null && !now.isBefore(account.getExpirationTime())) {
+            throw new AccountExpiredException("Account has expired");
+        }
+    }
+
+    protected Map<String, Object> collectAccountFields(final AccountEntity account) {
+        val fields = new LinkedHashMap<String, Object>();
+        putAccountField(fields, account.getId(), "id");
+        putAccountField(fields, account.getCode(), "code", "username");
+        putAccountField(fields, account.getName(), "name");
+        putAccountField(fields, account.getFirstName(), "firstName", "first_name");
+        putAccountField(fields, account.getLastName(), "lastName", "last_name");
+        putAccountField(fields, account.getNikeName(), "nikeName", "nike_name");
+        putAccountField(fields, account.getType(), "type");
+        putAccountField(fields, account.getPassword(), "password");
+        putAccountField(fields, account.getEmail(), "email");
+        putAccountField(fields, account.getEmail_reverse(), "email_reverse");
+        putAccountField(fields, account.getCallingCode(), "callingCode", "calling_code");
+        putAccountField(fields, account.getPhoneNumber(), "phoneNumber", "phone_number");
+        putAccountField(fields, account.getExpired(), "expired");
+        putAccountField(fields, account.getEffectiveTime(), "effectiveTime", "effective_time");
+        putAccountField(fields, account.getExpirationTime(), "expirationTime", "expiration_time");
+        return fields;
+    }
+
+    private static void putAccountField(final Map<String, Object> fields,
+                                        final Object value,
+                                        final String... names) {
+        if (value != null) {
+            for (val name : names) {
+                fields.put(name, value);
+            }
+        }
+    }
+
     @Override
-    protected AuthenticationHandlerExecutionResult authenticateUsernamePasswordInternal(UsernamePasswordCredential credential, String originalPassword) throws Throwable {
-        return null;
+    protected AuthenticationHandlerExecutionResult authenticateUsernamePasswordInternal(
+        final UsernamePasswordCredential credential, final String originalPassword) throws Throwable {
+        val username = credential.getUsername();
+        try {
+            val account = findAccount(username);
+            val databasePassword = account.getPassword();
+            val suppliedPassword = credential.toPassword();
+            val originalPasswordMatchFails = StringUtils.isNotBlank(originalPassword)
+                && !matches(originalPassword, databasePassword);
+            val transformedPasswordMatchFails = StringUtils.isBlank(originalPassword)
+                && !Strings.CI.equals(suppliedPassword, databasePassword);
+            if (originalPasswordMatchFails || transformedPasswordMatchFails) {
+                throw new FailedLoginException("Password does not match value on record");
+            }
+
+            verifyAccountStatus(account);
+            val principal = principalFactory.createPrincipal(username,
+                collectPrincipalAttributes(collectAccountFields(account)));
+            return createHandlerResult(credential, principal, new ArrayList<>());
+        } catch (final IncorrectResultSizeDataAccessException e) {
+            throw new FailedLoginException("Multiple records found for " + username);
+        } catch (final DataAccessException e) {
+            throw new PreventedException(e);
+        }
     }
 }

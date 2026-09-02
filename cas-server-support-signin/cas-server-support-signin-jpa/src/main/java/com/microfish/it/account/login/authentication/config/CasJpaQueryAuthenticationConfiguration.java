@@ -29,6 +29,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ScopedProxyMode;
 
 import org.apereo.cas.services.ServicesManager;
@@ -42,7 +43,8 @@ import org.apereo.cas.configuration.CasConfigurationProperties;
 import org.apereo.cas.configuration.features.CasFeatureModule;
 import org.apereo.cas.authentication.AuthenticationEventExecutionPlanConfigurer;
 
-import com.microfish.it.account.login.authentication.utils.JdbcAuthenticationUtils;
+import com.microfish.it.account.login.authentication.utils.JpaAuthenticationUtils;
+import com.microfish.it.account.login.authentication.repository.AccountRepository;
 
 /**
  * This is {@link CasJpaQueryAuthenticationConfiguration}.
@@ -54,7 +56,8 @@ import com.microfish.it.account.login.authentication.utils.JdbcAuthenticationUti
 @EnableConfigurationProperties(CasConfigurationProperties.class)
 @Slf4j
 @ConditionalOnFeatureEnabled(feature = CasFeatureModule.FeatureCatalog.Authentication, module = "jpa")
-@Configuration(value = "CasJdbcQueryAuthenticationConfiguration", proxyBeanMethods = false)
+@Configuration(value = "CasJpaQueryAuthenticationConfiguration", proxyBeanMethods = false)
+@Import(CasSigninJpaDataConfiguration.class)
 class CasJpaQueryAuthenticationConfiguration {
 
     @ConditionalOnMissingBean(name = "queryDatabaseAuthenticationHandlers")
@@ -68,13 +71,14 @@ class CasJpaQueryAuthenticationConfiguration {
         final ServicesManager servicesManager,
         @Qualifier("queryDatabasePrincipalFactory")
         final PrincipalFactory jdbcPrincipalFactory,
+        final AccountRepository accountRepository,
         final CasConfigurationProperties casProperties) {
         val handlers = new HashSet<AuthenticationHandler>();
         val jdbc = casProperties.getAuthn().getJdbc();
         jdbc.getQuery().forEach(properties -> {
-            val handler = JdbcAuthenticationUtils.newAuthenticationHandler(properties,
+            val handler = JpaAuthenticationUtils.newAuthenticationHandler(properties,
                 applicationContext, jdbcPrincipalFactory,
-                queryPasswordPolicyConfiguration);
+                queryPasswordPolicyConfiguration, accountRepository);
             handlers.add(handler);
         });
         return handlers;

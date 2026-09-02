@@ -22,6 +22,8 @@ import org.apereo.cas.configuration.CasConfigurationProperties;
 import org.apereo.cas.configuration.features.CasFeatureModule;
 import org.apereo.cas.util.spring.boot.ConditionalOnFeatureEnabled;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.boot.autoconfigure.AutoConfigureBefore;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Import;
 
@@ -35,11 +37,14 @@ import org.springframework.context.annotation.Import;
 @Slf4j
 @ConditionalOnFeatureEnabled(feature = CasFeatureModule.FeatureCatalog.Authentication, module = "jpa")
 @AutoConfiguration
+@AutoConfigureBefore(name = "org.apereo.cas.config.CasJdbcAuthenticationAutoConfiguration")
+@AutoConfigureAfter(CasSigninJpaDataConfiguration.class)
 @Import({
     CasJpaQueryAuthenticationConfiguration.class,
     CasJpaQueryEncodeAuthenticationConfiguration.class,
+    CasJpaSearchAuthenticationConfiguration.class,
+    CasJpaStoredProcedureAuthenticationConfiguration.class,
+    CasJpaAuthenticationMultitenancyConfiguration.class,
 })
 public class CasJpaAuthenticationAutoConfiguration {
 }
-
-

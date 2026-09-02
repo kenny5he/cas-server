@@ -39,7 +39,7 @@ import org.apereo.cas.configuration.model.support.jdbc.authn.SearchJdbcAuthentic
 import org.apereo.cas.configuration.support.ConfigurationPropertiesBindingContext;
 import org.apereo.cas.multitenancy.TenantDefinition;
 
-import com.microfish.it.account.login.authentication.utils.JdbcAuthenticationUtils;
+import com.microfish.it.account.login.authentication.utils.JpaAuthenticationUtils;
 
 /**
  * This is {@link TenantJpaAuthenticationHandlerBuilder}.
@@ -51,7 +51,9 @@ import com.microfish.it.account.login.authentication.utils.JdbcAuthenticationUti
 @RequiredArgsConstructor
 public class TenantJpaAuthenticationHandlerBuilder implements TenantAuthenticationHandlerBuilder {
     private final PasswordPolicyContext passwordPolicyConfiguration;
+
     private final PrincipalFactory jdbcPrincipalFactory;
+
     private final ConfigurableApplicationContext applicationContext;
 
     @Override
@@ -81,7 +83,7 @@ public class TenantJpaAuthenticationHandlerBuilder implements TenantAuthenticati
         final List<? extends BaseJdbcAuthenticationProperties> container,
         final List<AuthenticationHandler> finalHandlers) {
         container.forEach(properties -> {
-            val handler = JdbcAuthenticationUtils.newAuthenticationHandler(properties, applicationContext,
+            val handler = JpaAuthenticationUtils.newAuthenticationHandler(properties, applicationContext,
                 jdbcPrincipalFactory, passwordPolicyConfiguration);
             finalHandlers.add(handler.markDisposable());
         });

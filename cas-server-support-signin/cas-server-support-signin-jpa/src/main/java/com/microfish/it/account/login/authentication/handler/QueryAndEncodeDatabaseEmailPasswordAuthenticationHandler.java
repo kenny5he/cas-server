@@ -16,14 +16,24 @@
 
 package com.microfish.it.account.login.authentication.handler;
 
+import com.microfish.it.account.login.authentication.entity.AccountEntity;
+import com.microfish.it.account.login.authentication.repository.AccountRepository;
 import org.apereo.cas.authentication.principal.PrincipalFactory;
 import org.apereo.cas.configuration.model.support.jdbc.authn.QueryEncodeJdbcAuthenticationProperties;
 
-import javax.sql.DataSource;
+import javax.security.auth.login.AccountNotFoundException;
 
 public class QueryAndEncodeDatabaseEmailPasswordAuthenticationHandler extends AbstractJpaUsernamePasswordAuthenticationHandler<QueryEncodeJdbcAuthenticationProperties> {
 
-    protected QueryAndEncodeDatabaseEmailPasswordAuthenticationHandler(QueryEncodeJdbcAuthenticationProperties properties, PrincipalFactory principalFactory, DataSource dataSource) {
-        super(properties, principalFactory, dataSource);
+    protected QueryAndEncodeDatabaseEmailPasswordAuthenticationHandler(final QueryEncodeJdbcAuthenticationProperties properties,
+                                                                       final PrincipalFactory principalFactory,
+                                                                       final AccountRepository accountRepository) {
+        super(properties, principalFactory, accountRepository);
+    }
+
+    @Override
+    protected AccountEntity findAccount(final String email) throws AccountNotFoundException {
+        return accountRepository.findByEmail(email)
+            .orElseThrow(() -> new AccountNotFoundException(email + " not found with JPA query"));
     }
 }

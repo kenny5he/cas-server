@@ -19,11 +19,11 @@ package com.microfish.it.account.login.authentication.repository;
 import com.microfish.it.account.login.authentication.entity.AccountEntity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 
-@Repository
 public interface AccountRepository extends JpaRepository<AccountEntity, Long> {
 
     /**
@@ -31,7 +31,8 @@ public interface AccountRepository extends JpaRepository<AccountEntity, Long> {
      * @param username
      * @return 用户
      */
-    Optional<AccountEntity> findByUsername(String username);
+    @Query("select a from JpaAccountEntity a where a.code = :username")
+    Optional<AccountEntity> findByUsername(@Param("username") String username);
 
     /**
      * 通过 邮箱 查询用户信息
@@ -42,8 +43,11 @@ public interface AccountRepository extends JpaRepository<AccountEntity, Long> {
 
     /**
      * 通过 手机号码 查询用户信息
+     * @param callingCode 国家电话区号
      * @param phoneNumber 手机号码
      * @return 用户
      */
-    Optional<AccountEntity> findByPhoneNumber(String callingCode, String phoneNumber);
+    @Query("select a from JpaAccountEntity a where a.callingCode = :callingCode and a.phoneNumber = :phoneNumber")
+    Optional<AccountEntity> findByPhoneNumber(@Param("callingCode") String callingCode,
+                                              @Param("phoneNumber") String phoneNumber);
 }
