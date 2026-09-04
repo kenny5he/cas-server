@@ -40,6 +40,13 @@
             <version>${cas.server.version}</version>
         </dependency>
 
+        <!-- 扫码登录 -->
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-qr-authentication</artifactId>
+            <version>${cas.server.version}</version>
+        </dependency>
+
         <!-- Tomcat  -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

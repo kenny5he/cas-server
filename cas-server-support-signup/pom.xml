@@ -12,9 +12,9 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>cas-server-support-signup-api</module>
         <module>cas-server-support-signup-jpa</module>
         <module>cas-server-support-signup-jdbc</module>
-        <module>cas-server-support-signup-api</module>
     </modules>
 
     <dependencies>
