@@ -52,7 +52,7 @@ import com.microfish.it.account.login.authentication.utils.JpaAuthenticationUtil
 @EnableConfigurationProperties(CasConfigurationProperties.class)
 @ConditionalOnFeatureEnabled(feature = CasFeatureModule.FeatureCatalog.Authentication, module = "jpa")
 @Configuration(value = "CasJpaStoredProcedureAuthenticationConfiguration", proxyBeanMethods = false)
-@Import(CasSigninJpaDataConfiguration.class)
+@Import(CasSignInJpaDataConfiguration.class)
 class CasJpaStoredProcedureAuthenticationConfiguration {
 
     @ConditionalOnMissingBean(name = "storedProcedureAuthenticationHandlers")

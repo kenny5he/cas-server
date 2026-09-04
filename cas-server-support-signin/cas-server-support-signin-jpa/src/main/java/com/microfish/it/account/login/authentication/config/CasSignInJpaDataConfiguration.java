@@ -46,5 +46,5 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 })
 @EntityScan(basePackageClasses = AccountEntity.class)
 @EnableJpaRepositories(basePackageClasses = AccountRepository.class)
-public class CasSigninJpaDataConfiguration {
+public class CasSignInJpaDataConfiguration {
 }

@@ -1,0 +1,6 @@
+CasFeatureModule:
+  Authentication:
+    jdbc:
+      enabled: false
+    jpa:
+      enabled: true

@@ -57,7 +57,7 @@ import com.microfish.it.account.login.authentication.repository.AccountRepositor
 @Slf4j
 @ConditionalOnFeatureEnabled(feature = CasFeatureModule.FeatureCatalog.Authentication, module = "jpa")
 @Configuration(value = "CasJpaQueryEncodeAuthenticationConfiguration", proxyBeanMethods = false)
-@Import(CasSigninJpaDataConfiguration.class)
+@Import(CasSignInJpaDataConfiguration.class)
 class CasJpaQueryEncodeAuthenticationConfiguration {
 
     @ConditionalOnMissingBean(name = "queryAndEncodeDatabaseAuthenticationHandlers")
@@ -71,13 +71,12 @@ class CasJpaQueryEncodeAuthenticationConfiguration {
         final ServicesManager servicesManager,
         @Qualifier("queryAndEncodePrincipalFactory")
         final PrincipalFactory jdbcPrincipalFactory,
-        final AccountRepository accountRepository,
         final CasConfigurationProperties casProperties) {
         val handlers = new HashSet<AuthenticationHandler>();
         val jdbc = casProperties.getAuthn().getJdbc();
         jdbc.getEncode().forEach(properties -> {
             val handler = JpaAuthenticationUtils.newAuthenticationHandler(properties, applicationContext,
-                jdbcPrincipalFactory, queryAndEncodePasswordPolicyConfiguration, accountRepository);
+                jdbcPrincipalFactory, queryAndEncodePasswordPolicyConfiguration);
             handlers.add(handler);
         });
         return handlers;

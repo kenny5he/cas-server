@@ -2,14 +2,14 @@ spring:
   application:
     name: cas
   profiles:
-    active: standalone
+    active: dev
   main:
     allow-bean-definition-overriding: true
   datasource:
     url: jdbc:mysql://db.mysql.Laf1j8Y6Bd.microfish.com:23306/cas
     username: root
     password: dmt.123
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     show-sql: true
     database-platform: org.hibernate.dialect.MySQLDialect
@@ -27,3 +27,7 @@ spring:
           writetimeout: 5000
           socketFactoryClass: javax.net.ssl.SSLSocketFactory
           debug: true
+
+account:
+  theme:
+    default-theme-name: standard

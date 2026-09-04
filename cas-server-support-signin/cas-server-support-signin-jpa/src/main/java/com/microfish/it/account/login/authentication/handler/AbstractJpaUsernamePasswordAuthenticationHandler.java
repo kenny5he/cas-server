@@ -111,7 +111,7 @@ public abstract class AbstractJpaUsernamePasswordAuthenticationHandler<T extends
     protected Map<String, Object> collectAccountFields(final AccountEntity account) {
         val fields = new LinkedHashMap<String, Object>();
         putAccountField(fields, account.getId(), "id");
-        putAccountField(fields, account.getCode(), "code", "username");
+        putAccountField(fields, account.getNumber(), "number");
         putAccountField(fields, account.getName(), "name");
         putAccountField(fields, account.getFirstName(), "firstName", "first_name");
         putAccountField(fields, account.getLastName(), "lastName", "last_name");

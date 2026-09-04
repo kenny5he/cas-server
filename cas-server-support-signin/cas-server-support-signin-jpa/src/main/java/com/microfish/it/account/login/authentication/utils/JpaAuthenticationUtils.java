@@ -50,7 +50,7 @@ import com.microfish.it.account.login.authentication.handler.StoredProcedureAuth
 import com.microfish.it.account.login.authentication.repository.AccountRepository;
 
 /**
- * Authentication handler factory for the JPA-backed sign-in module.
+ * A JDBC utility class.
  *
  * @author Jerome LELEU
  * @since 7.0.0

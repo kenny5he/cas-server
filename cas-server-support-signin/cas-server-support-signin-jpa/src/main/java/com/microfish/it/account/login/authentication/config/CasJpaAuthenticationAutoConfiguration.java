@@ -38,7 +38,7 @@ import org.springframework.context.annotation.Import;
 @ConditionalOnFeatureEnabled(feature = CasFeatureModule.FeatureCatalog.Authentication, module = "jpa")
 @AutoConfiguration
 @AutoConfigureBefore(name = "org.apereo.cas.config.CasJdbcAuthenticationAutoConfiguration")
-@AutoConfigureAfter(CasSigninJpaDataConfiguration.class)
+@AutoConfigureAfter(CasSignInJpaDataConfiguration.class)
 @Import({
     CasJpaQueryAuthenticationConfiguration.class,
     CasJpaQueryEncodeAuthenticationConfiguration.class,

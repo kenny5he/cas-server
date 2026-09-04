@@ -51,7 +51,7 @@ import com.microfish.it.account.login.authentication.utils.JpaAuthenticationUtil
 @EnableConfigurationProperties(CasConfigurationProperties.class)
 @ConditionalOnFeatureEnabled(feature = CasFeatureModule.FeatureCatalog.Authentication, module = "jpa")
 @Configuration(value = "CasJpaSearchAuthenticationConfiguration", proxyBeanMethods = false)
-@Import(CasSigninJpaDataConfiguration.class)
+@Import(CasSignInJpaDataConfiguration.class)
 class CasJpaSearchAuthenticationConfiguration {
 
     @ConditionalOnMissingBean(name = "searchModeAuthenticationHandlers")
@@ -65,12 +65,11 @@ class CasJpaSearchAuthenticationConfiguration {
         final ServicesManager servicesManager,
         @Qualifier("searchModePrincipalFactory")
         final PrincipalFactory principalFactory,
-        final AccountRepository accountRepository,
         final CasConfigurationProperties casProperties) {
         val handlers = new HashSet<AuthenticationHandler>();
         casProperties.getAuthn().getJdbc().getSearch().forEach(properties -> {
             val handler = JpaAuthenticationUtils.newAuthenticationHandler(properties, applicationContext,
-                principalFactory, passwordPolicyConfiguration, accountRepository);
+                principalFactory, passwordPolicyConfiguration);
             handlers.add(handler);
         });
         return handlers;

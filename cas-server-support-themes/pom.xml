@@ -45,5 +45,10 @@
             <artifactId>cas-server-support-themes-core</artifactId>
             <version>${cas.server.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>cas-server-core-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>

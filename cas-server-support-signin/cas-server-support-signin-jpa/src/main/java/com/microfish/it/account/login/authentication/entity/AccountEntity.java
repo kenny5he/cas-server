@@ -69,7 +69,7 @@ public class AccountEntity implements Serializable {
      *      2. 华为工号: c00194830
      */
     @Column(nullable = false)
-    private String code;
+    private String number;
 
     /**
      * 姓名（全）

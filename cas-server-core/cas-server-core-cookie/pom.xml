@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>cas-server-core</artifactId>
+            <artifactId>cas-server-core-api</artifactId>
             <version>${project.version}</version>
         </dependency>
 
