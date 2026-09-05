@@ -21,20 +21,26 @@ import com.microfish.it.account.login.authentication.pac4j.Pac4jAuthenticationPr
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Bean;
 
 /**
  *
  * @author kenny.he
  * @since 2022/07/29
  */
-@Configuration
+@AutoConfiguration
 @EnableConfigurationProperties({
     Pac4jAuthenticationProperties.class
 })
 public class Pac4jAuthenticationAutoConfiguration {
     private static final Logger logger = LoggerFactory.getLogger(Pac4jAuthenticationAutoConfiguration.class);
 
+    @Bean
+    public static BeanPostProcessor oauth2PropertiesPostProcessor() {
+        return new OAuth2PropertiesPostProcessor();
+    }
 
 }

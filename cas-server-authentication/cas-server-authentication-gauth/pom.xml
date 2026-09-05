@@ -7,7 +7,7 @@
         <version>7.3.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>cas-server-support-gauth</artifactId>
+    <artifactId>cas-server-authentication-gauth</artifactId>
     <name>cas-server-support-gauth</name>
 
     <dependencies>

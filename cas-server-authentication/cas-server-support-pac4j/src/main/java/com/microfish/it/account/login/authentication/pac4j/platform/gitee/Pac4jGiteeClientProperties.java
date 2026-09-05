@@ -35,6 +35,18 @@ import java.util.Map;
 @Accessors(chain = true)
 public class Pac4jGiteeClientProperties extends Pac4jOAuth20ClientProperties {
 
+    /**
+     * Backward-compatible spelling used by the existing application YAML.
+     * CAS 7.x calls the inherited property {@code principalIdAttribute}.
+     */
+    private String principalAttributeId;
+
+    public Pac4jGiteeClientProperties() {
+        setProfileVerb("GET");
+        setDefaultCustomParams();
+        setDefaultProfileAttrs();
+    }
+
     @Override
     public String getClientName() {
         return StringUtils.getIfBlank(super.getClientName(), ()-> "gitee");
@@ -42,31 +54,54 @@ public class Pac4jGiteeClientProperties extends Pac4jOAuth20ClientProperties {
 
     @Override
     public String getAuthUrl() {
-        return StringUtils.getIfBlank(super.getClientName(), ()-> "https://gitee.com/oauth/authorize");
+        return StringUtils.getIfBlank(super.getAuthUrl(), () -> "https://gitee.com/oauth/authorize");
     }
 
     @Override
     public String getTokenUrl() {
-        return StringUtils.getIfBlank(super.getClientName(), ()-> "https://gitee.com/oauth/token");
+        return StringUtils.getIfBlank(super.getTokenUrl(), () -> "https://gitee.com/oauth/token");
     }
 
     @Override
     public String getProfileUrl() {
-        return StringUtils.getIfBlank(super.getClientName(), ()-> "https://gitee.com/api/v5/user");
+        return StringUtils.getIfBlank(super.getProfileUrl(), () -> "https://gitee.com/api/v5/user");
     }
 
     @Override
     public String getProfileVerb() {
-        return StringUtils.getIfBlank(super.getClientName(), ()-> "GET");
+        return StringUtils.getIfBlank(super.getProfileVerb(), () -> "GET");
+    }
+
+    @Override
+    public String getPrincipalIdAttribute() {
+        return StringUtils.getIfBlank(super.getPrincipalIdAttribute(), () -> principalAttributeId);
     }
 
     @Override
     public Map<String, String> getProfileAttrs() {
-        return super.getProfileAttrs();
+        var profileAttrs = super.getProfileAttrs();
+        profileAttrs.putIfAbsent("updated_at", "updated_at");
+        profileAttrs.putIfAbsent("created_at", "created_at");
+        profileAttrs.putIfAbsent("name", "name");
+        profileAttrs.putIfAbsent("email", "email");
+        profileAttrs.putIfAbsent("login", "login");
+        profileAttrs.putIfAbsent("type", "type");
+        profileAttrs.putIfAbsent("avatar_url", "avatar_url");
+        return profileAttrs;
     }
 
     @Override
     public Map<String, String> getCustomParams() {
-        return super.getCustomParams();
+        var customParams = super.getCustomParams();
+        customParams.putIfAbsent("scope", "user_info");
+        return customParams;
+    }
+
+    private void setDefaultCustomParams() {
+        getCustomParams();
+    }
+
+    private void setDefaultProfileAttrs() {
+        getProfileAttrs();
     }
 }

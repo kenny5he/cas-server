@@ -14,7 +14,8 @@
         <module>cas-server-support-oauth2</module>
         <module>cas-server-support-pac4j</module>
         <module>cas-server-support-oidc</module>
-        <module>cas-server-support-gauth</module>
+        <module>cas-server-authentication-gauth</module>
+        <module>cas-server-authentication-wechat</module>
     </modules>
 
     <dependencies>
