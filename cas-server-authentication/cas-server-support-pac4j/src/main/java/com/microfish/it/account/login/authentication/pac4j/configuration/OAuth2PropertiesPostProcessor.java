@@ -17,7 +17,6 @@
 package com.microfish.it.account.login.authentication.pac4j.configuration;
 
 import com.microfish.it.account.login.authentication.pac4j.Pac4jAuthenticationProperties;
-import com.microfish.it.account.login.authentication.pac4j.platform.gitee.Pac4jGiteeClientProperties;
 import org.apereo.cas.configuration.CasConfigurationProperties;
 import org.apereo.cas.configuration.model.support.pac4j.oauth.Pac4jOAuth20ClientProperties;
 import org.springframework.beans.BeansException;

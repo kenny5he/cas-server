@@ -19,10 +19,11 @@ package com.microfish.it.account.login.authentication.pac4j.platform.gitee;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.apache.commons.lang3.StringUtils;
-import org.apereo.cas.configuration.model.support.pac4j.oauth.Pac4jOAuth20ClientProperties;
 
 import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apereo.cas.configuration.model.support.pac4j.oauth.Pac4jOAuth20ClientProperties;
 
 /**
  * gitee 登录集成: 参考博客: https://blog.csdn.net/Coder_Knight/article/details/120740279

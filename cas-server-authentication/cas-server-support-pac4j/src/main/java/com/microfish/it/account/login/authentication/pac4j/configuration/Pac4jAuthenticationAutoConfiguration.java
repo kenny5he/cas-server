@@ -25,6 +25,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 
 import com.microfish.it.account.login.authentication.pac4j.Pac4jAuthenticationProperties;
+import com.microfish.it.account.login.authentication.pac4j.platform.oauth2.client.OAuth2DelegatedClientBuilder;
 import com.microfish.it.account.login.authentication.pac4j.platform.wechat.client.WechatDelegatedClientBuilder;
 import com.microfish.it.account.login.authentication.pac4j.platform.workwechat.client.WorkWechatDelegatedClientBuilder;
 
@@ -57,4 +58,9 @@ public class Pac4jAuthenticationAutoConfiguration {
         return new WorkWechatDelegatedClientBuilder(properties);
     }
 
+    @Bean
+    public OAuth2DelegatedClientBuilder oauth2DelegatedClientBuilder(
+            final Pac4jAuthenticationProperties properties) {
+        return new OAuth2DelegatedClientBuilder(properties);
+    }
 }

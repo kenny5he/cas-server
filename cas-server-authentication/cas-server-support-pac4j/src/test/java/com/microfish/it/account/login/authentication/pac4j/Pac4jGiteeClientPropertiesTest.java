@@ -9,9 +9,11 @@ package com.microfish.it.account.login.authentication.pac4j;
 
 import com.microfish.it.account.login.authentication.pac4j.configuration.OAuth2PropertiesPostProcessor;
 import com.microfish.it.account.login.authentication.pac4j.platform.gitee.Pac4jGiteeClientProperties;
+import com.microfish.it.account.login.authentication.pac4j.platform.oauth2.client.OAuth2DelegatedClientBuilder;
 import junit.framework.TestCase;
 import org.apereo.cas.configuration.CasConfigurationProperties;
 import org.apereo.cas.configuration.model.support.pac4j.oauth.Pac4jOAuth20ClientProperties;
+import org.pac4j.oauth.client.GenericOAuth20Client;
 
 /**
  * Tests for application-specific Gitee OAuth2 defaults and CAS property merging.
@@ -73,5 +75,26 @@ public class Pac4jGiteeClientPropertiesTest extends TestCase {
         assertEquals("gitee-id", casGitee.getId());
         assertEquals("gitee-secret", casGitee.getSecret());
         assertEquals("avatar_url", casGitee.getProfileAttrs().get("avatar_url"));
+    }
+
+    public void testConfiguredGiteeClientIsBuiltForCas() {
+        var applicationProperties = new Pac4jAuthenticationProperties();
+        applicationProperties.getGitee().setId("gitee-id");
+        applicationProperties.getGitee().setSecret("gitee-secret");
+
+        var casProperties = new CasConfigurationProperties();
+        var clients = new OAuth2DelegatedClientBuilder(applicationProperties)
+                .build(casProperties);
+
+        assertEquals(1, clients.size());
+        assertEquals(1, casProperties.getAuthn().getPac4j().getOauth2().size());
+        assertTrue(clients.get(0).getClient() instanceof GenericOAuth20Client);
+        var client = (GenericOAuth20Client) clients.get(0).getClient();
+        assertEquals("gitee-id", client.getKey());
+        assertEquals("gitee", clients.get(0).getClient().getName());
+        assertSame(applicationProperties.getGitee(), clients.get(0).getProperties());
+        client.setCallbackUrl("http://localhost/login");
+        client.init();
+        assertTrue(client.isInitialized());
     }
 }
