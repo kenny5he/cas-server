@@ -14,13 +14,15 @@
  * limitations under the License.
  */
 
-package com.microfoolish.it.account.signin.configuration;
+package com.microfoolish.it.account.signup.configuration;
 
 /**
  *
  *
+ * @see org.apereo.cas.configuration.model.support.account.AccountManagementRegistrationProperties
+ *
  * @author kenny.he
  * @since 2026/09/04
  */
-public class CasSignInProperties {
+public class CasSignupProperties {
 }

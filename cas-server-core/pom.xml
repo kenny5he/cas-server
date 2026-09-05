@@ -16,6 +16,7 @@
         <module>cas-server-core-multitenancy</module>
         <module>cas-server-core-cookie</module>
         <module>cas-server-core-session</module>
+        <module>cas-server-core-webflow</module>
     </modules>
 
     <dependencies>

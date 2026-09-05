@@ -14,13 +14,25 @@
  * limitations under the License.
  */
 
-package com.microfoolish.it.account.signin.configuration;
+package com.microfish.it.account.login.cookie.configuration;
+
+import com.microfish.it.account.login.configuration.annotation.ConfigurationPropertiesMapping;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
+ * @see org.apereo.cas.configuration.model.support.cookie.TicketGrantingCookieProperties
  *
  * @author kenny.he
  * @since 2026/09/04
  */
-public class CasSignInProperties {
+@Getter
+@Setter
+@ConfigurationPropertiesMapping(casPrefix = "cas.tgc", prefix = "account.cookie")
+public class CasCookieProperties {
+
+    private Boolean secure = true;
+
+    private String name = "W3-TGC";
 }

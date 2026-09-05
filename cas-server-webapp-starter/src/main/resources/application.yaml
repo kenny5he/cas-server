@@ -29,5 +29,17 @@ spring:
           debug: true
 
 account:
+  signup:
+    crypto:
+      encryption:
+        key: sskboTPsQ28hb8BZdvHdG03kCJBPvWpnBYs-Vp6Z2gE
+      signing:
+        key: WNUaWmfCXJ6GhNWKgmyXPIX4pPD6adPhOPmuDozK1MsCS90wf4s7pTORGDsH0ERjEdYsSW-lrnf_ENU7yEsBUw
+  cookie:
+    encryption:
+      key: 0ftidJb9GVeUs75GRdFqpysIHPC9_LyaQoBGl8PJQ4Y
+    crypto:
+      signing:
+        key: CqjPXQPN_dNGyo_S48RP51Vz9hT7b-231SvFcqY4IaLjEHmzfKPLs_UR38hid01dksEEauZgqFHrZpQUc26Msg
   theme:
     default-theme-name: standard

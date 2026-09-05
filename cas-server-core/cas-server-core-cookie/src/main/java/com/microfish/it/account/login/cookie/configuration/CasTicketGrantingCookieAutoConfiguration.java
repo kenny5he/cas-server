@@ -16,27 +16,20 @@
 
 package com.microfish.it.account.login.cookie.configuration;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.EnvironmentAware;
+import com.microfish.it.account.login.configuration.annotation.EnableConfigurationMapping;
+import org.apereo.cas.configuration.features.CasFeatureModule;
+import org.apereo.cas.util.spring.boot.ConditionalOnFeatureEnabled;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 
 /**
  * 客制化 TGC 配置
+ *
  * @author kenny.he
  * @since 2022/05/01
  */
 @Configuration
-@PropertySource(value = {"classpath:/configs/ticket-cookie.properties"})
-public class CustomTicketGrantingCookieAutoConfiguration implements EnvironmentAware {
-    private static Logger logger = LoggerFactory.getLogger(CustomTicketGrantingCookieAutoConfiguration.class);
+@ConditionalOnFeatureEnabled(feature = CasFeatureModule.FeatureCatalog.AccountRegistration)
+@EnableConfigurationMapping(classes = {CasCookieProperties.class, CasTicketGrantingCookieCryptoProperties.class})
+public class CasTicketGrantingCookieAutoConfiguration {
 
-    private Environment environment;
-
-    @Override
-    public void setEnvironment(Environment environment) {
-        this.environment = environment;
-    }
 }

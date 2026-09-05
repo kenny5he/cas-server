@@ -23,6 +23,5 @@ import org.springframework.boot.autoconfigure.AutoConfiguration;
  * Enables application-facing aliases for CAS theme properties.
  */
 @AutoConfiguration
-@EnableConfigurationMapping(classes = CasSignInCryptoProperties.class)
 public class CasSignInAutoConfiguration {
 }

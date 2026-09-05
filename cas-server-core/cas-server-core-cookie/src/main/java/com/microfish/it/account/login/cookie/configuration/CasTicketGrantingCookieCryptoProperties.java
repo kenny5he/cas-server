@@ -14,18 +14,30 @@
  * limitations under the License.
  */
 
-package com.microfoolish.it.account.signin.configuration;
+package com.microfish.it.account.login.cookie.configuration;
 
+import com.microfish.it.account.login.configuration.annotation.ConfigurationPropertiesMapping;
+import com.microfish.it.account.login.configuration.annotation.PropertyMapping;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
+ *
+ * @see org.apereo.cas.configuration.model.core.util.EncryptionJwtSigningJwtCryptographyProperties
  *
  * @author kenny.he
  * @since 2026/09/04
  */
 @Getter
 @Setter
-public class CasSignInCryptoProperties {
+@ConfigurationPropertiesMapping(casPrefix = "cas.tgc.crypto", prefix = "account.cookie.crypto")
+public class CasTicketGrantingCookieCryptoProperties {
 
+    private Boolean enabled;
+
+    @PropertyMapping(property = "encryption.key")
+    private String encryptionKey;
+
+    @PropertyMapping(property = "signing.key")
+    private String signingKey;
 }

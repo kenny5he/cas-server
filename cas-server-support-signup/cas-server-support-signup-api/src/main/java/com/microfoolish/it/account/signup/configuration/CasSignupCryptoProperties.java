@@ -14,13 +14,24 @@
  * limitations under the License.
  */
 
-package com.microfoolish.it.account.signin.configuration;
+package com.microfoolish.it.account.signup.configuration;
+
+import com.microfish.it.account.login.configuration.annotation.ConfigurationPropertiesMapping;
+import com.microfish.it.account.login.configuration.annotation.PropertyMapping;
 
 /**
  *
+ * @see org.apereo.cas.configuration.model.core.util.EncryptionJwtSigningJwtCryptographyProperties
  *
  * @author kenny.he
  * @since 2026/09/04
  */
-public class CasSignInProperties {
+@ConfigurationPropertiesMapping(casPrefix = "cas.account-registration.core.crypto", prefix = "account.signup.crypto")
+public class CasSignupCryptoProperties {
+
+    @PropertyMapping(property = "encryption.key")
+    private String encryptionKey;
+
+    @PropertyMapping(property = "signing.key")
+    private String signingKey;
 }
