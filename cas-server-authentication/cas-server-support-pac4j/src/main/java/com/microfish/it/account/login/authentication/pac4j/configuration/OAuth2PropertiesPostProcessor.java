@@ -87,6 +87,13 @@ public final class OAuth2PropertiesPostProcessor implements BeanPostProcessor, B
                 .findFirst()
                 .orElse(null);
 
+        if (!oauth2Properties.isEnabled()) {
+            if (existing != null) {
+                existing.setEnabled(false);
+            }
+            return;
+        }
+
         if (existing == null) {
             if (StringUtils.hasText(oauth2Properties.getId())
                     && StringUtils.hasText(oauth2Properties.getSecret())) {

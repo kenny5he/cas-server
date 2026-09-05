@@ -16,8 +16,6 @@
 
 package com.microfish.it.account.login.authentication.pac4j.configuration;
 
-import com.microfish.it.account.login.authentication.pac4j.Pac4jAuthenticationProperties;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,6 +23,10 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+
+import com.microfish.it.account.login.authentication.pac4j.Pac4jAuthenticationProperties;
+import com.microfish.it.account.login.authentication.pac4j.platform.wechat.client.WechatDelegatedClientBuilder;
+import com.microfish.it.account.login.authentication.pac4j.platform.workwechat.client.WorkWechatDelegatedClientBuilder;
 
 /**
  *
@@ -41,6 +43,18 @@ public class Pac4jAuthenticationAutoConfiguration {
     @Bean
     public static BeanPostProcessor oauth2PropertiesPostProcessor() {
         return new OAuth2PropertiesPostProcessor();
+    }
+
+    @Bean
+    public WechatDelegatedClientBuilder wechatDelegatedClientBuilder(
+            final Pac4jAuthenticationProperties properties) {
+        return new WechatDelegatedClientBuilder(properties);
+    }
+
+    @Bean
+    public WorkWechatDelegatedClientBuilder workWechatDelegatedClientBuilder(
+            final Pac4jAuthenticationProperties properties) {
+        return new WorkWechatDelegatedClientBuilder(properties);
     }
 
 }

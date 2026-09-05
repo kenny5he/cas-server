@@ -1,7 +1,7 @@
 server:
   port: 443
   servlet:
-    context-path=/cas
+    context-path: /cas
   ssl:
     key-store: classpath:login.microfoolish.com.jks
     key-store-password: 9BGfqk9I
@@ -9,7 +9,7 @@ server:
     enabled: true
 spring:
   datasource:
-    url: jdbc:postgresql://47.107.152.2:5432/account
+    url: jdbc:postgresql://47.107.152.2:5432/login
     username: login
     password: login-pg$123
     driver-class-name: org.postgresql.Driver
