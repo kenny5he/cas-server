@@ -14,19 +14,24 @@
  * limitations under the License.
  */
 
-package com.microfish.it.account.login.cookie.configuration;
+package com.microfish.it.account.login.authentication.oauth2.configuration;
 
 import com.microfish.it.account.login.configuration.annotation.EnableConfigurationMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.context.annotation.Configuration;
 
 /**
- * 客制化 TGC 配置
  *
  * @author kenny.he
- * @since 2022/05/01
+ * @since 2022/07/29
  */
 @Configuration
-@EnableConfigurationMapping(classes = {CasCookieProperties.class, CasTicketGrantingCookieCryptoProperties.class})
-public class CasTicketGrantingCookieAutoConfiguration {
+@EnableConfigurationMapping(classes = {
+    OAuth2AuthenticationCryptProperties.class,
+    OAuth2AccessTokenCryptProperties.class
+})
+public class OAuth2AuthenticationAutoConfiguration {
 
 }

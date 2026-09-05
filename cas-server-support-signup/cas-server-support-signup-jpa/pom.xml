@@ -21,7 +21,7 @@
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>cas-server-support-jpa</artifactId>
+            <artifactId>cas-server-core-jpa</artifactId>
             <version>${project.version}</version>
         </dependency>
 

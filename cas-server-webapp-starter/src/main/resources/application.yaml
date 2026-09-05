@@ -29,6 +29,39 @@ spring:
           debug: true
 
 account:
+  authn:
+    oauth:
+      crypto:
+        encryption:
+          key: ju6yO4x06d0rLR2ZxCDBjKKTN8YVR6C25X7vAggF9-F6rWU2P6q08gVWfTJcAL3w4liJgUis6DpOMCGgObkvCQ
+        signing:
+          key: 6auXQOLafFw_winBh8o-7d0JhCIb2D2-L997S4M_h45qRSnXdSENpVc79zulcvFiiNUy0Nb57bFhg_9FUS0cdw
+      access-token:
+        crypto:
+          encryption:
+            key: 1zLn6ezW8IVbnjvjdA2limVY5Q27IAazA4xImg3CFJATUtF6x75P9r_FynhQOZiWJs54K6z-_-o41oWpo4dRSQ
+          signing:
+            key: c9LrhiL5K4icpp2poq9pPJ1FW6dir8Fxh7CkA0wJuyE4TmybFeMvVIPBZiQZ3WPD-ILYeIH1RINRIZpxGaRhLw
+    pac4j:
+      wechat:
+        id: wx3e3171f25dee2f11
+        scope: snsapi_login
+        secret: 2926c08a74ab201562507aae266a8ae7
+        client-name: WeChat
+        callbackUrlType: QUERY_PARAMETER
+      work-wechat:
+        id: ww5f87fc7b462fb06d
+        agentId: 1000003
+        scope: snsapi_login
+        secret: 5CjhcfUeiXAkddvXn0paYVssix20kswPlgig8AwIoLk
+        client-name: Work_WeChat
+        callbackUrlType: QUERY_PARAMETER
+      gitee:
+        id: 10c1fc08d912ac919885c0d1d265528f9b50a2b588671664dfa5ff320b56d8dc
+        secret: eac6d3797926441059af19e5a27e9bf38a52858ffec745bdcdea6a4de0a34998
+        client-name: Gitee
+        principalAttributeId: name
+        callbackUrlType: QUERY_PARAMETER
   signup:
     crypto:
       encryption:
@@ -37,9 +70,9 @@ account:
         key: WNUaWmfCXJ6GhNWKgmyXPIX4pPD6adPhOPmuDozK1MsCS90wf4s7pTORGDsH0ERjEdYsSW-lrnf_ENU7yEsBUw
   cookie:
     encryption:
-      key: 0ftidJb9GVeUs75GRdFqpysIHPC9_LyaQoBGl8PJQ4Y
+      key: 1Sl-FbfKXKMs6jYOTGdu9V92eHMr5k53ZWabsL1JsyK8d2yc9Cq-NzT6BRiv9sijARh2qRxI2xujOKMzAdm0MQ
     crypto:
       signing:
-        key: CqjPXQPN_dNGyo_S48RP51Vz9hT7b-231SvFcqY4IaLjEHmzfKPLs_UR38hid01dksEEauZgqFHrZpQUc26Msg
+        key: stVLQSJmEzdbLN3za5xjxPAgvRu6cDoMzDTS_vrBC4BiQOW5vq0HL4kMx_GieqUcDRC7vhzWtVtS4pOyeRR5ow
   theme:
     default-theme-name: standard

@@ -14,19 +14,26 @@
  * limitations under the License.
  */
 
-package com.microfish.it.account.login.cookie.configuration;
+package com.microfish.it.account.login.authentication.pac4j.platform.wechat;
 
-import com.microfish.it.account.login.configuration.annotation.EnableConfigurationMapping;
-import org.springframework.context.annotation.Configuration;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
+import org.pac4j.oauth.client.WechatClient;
+import org.apereo.cas.configuration.model.support.pac4j.Pac4jIdentifiableClientProperties;
 
 /**
- * 客制化 TGC 配置
+ * 微信
+ *
+ * WeChat OAuth Login: https://blog.csdn.net/u010475041/article/details/78300586
  *
  * @author kenny.he
- * @since 2022/05/01
+ * @since 2022/08/07
  */
-@Configuration
-@EnableConfigurationMapping(classes = {CasCookieProperties.class, CasTicketGrantingCookieCryptoProperties.class})
-public class CasTicketGrantingCookieAutoConfiguration {
+@Getter
+@Setter
+@Accessors(chain = true)
+public class Pac4jWeChatClientProperties extends Pac4jIdentifiableClientProperties {
 
+    private WechatClient.WechatScope scope;
 }

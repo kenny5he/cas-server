@@ -27,6 +27,8 @@
     <modules>
         <!-- 核心模块 -->
         <module>cas-server-core</module>
+        <!-- 认证模块 -->
+        <module>cas-server-authentication</module>
         <!-- 登录模块-->
         <module>cas-server-support-signin</module>
         <!-- 注册模块-->
@@ -35,7 +37,6 @@
         <module>cas-server-support-profile</module>
         <module>cas-server-support-pm</module>
         <module>cas-server-support-captcha</module>
-        <module>cas-server-support-jpa</module>
         <module>cas-server-support-consent</module>
         <module>cas-server-support-ticket</module>
         <module>cas-server-support-saml</module>
@@ -43,7 +44,6 @@
         <module>cas-server-support-notification</module>
         <module>cas-server-support-audit</module>
         <module>cas-server-support-service-registry</module>
-        <module>cas-server-integration</module>
         <module>cas-server-webapp-starter</module>
     </modules>
 

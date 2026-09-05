@@ -32,7 +32,7 @@ import org.springframework.webflow.engine.builder.support.FlowBuilderServices;
  */
 public class CasSignupWebflowConfigurer extends AbstractCasWebflowConfigurer {
 
-    public static final String REGISTRATION_FLOW_PATH = "registration";
+    public static final String REGISTRATION_FLOW_PATH = "register";
 
     public static final String REGISTRATION_REQUEST_ATTRIBUTE =
             CasSignupWebflowConfigurer.class.getName() + ".request";
