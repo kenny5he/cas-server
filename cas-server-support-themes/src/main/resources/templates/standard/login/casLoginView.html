@@ -9,65 +9,66 @@
 
 <body class="login mdc-typography">
 <div layout:fragment="content" class="d-flex justify-content-end">
-   <div id="login-card" class="d-flex flex-column mdc-card mdc-card-content card flex-grow-1"
+    <div id="login-card" class="d-flex flex-column mdc-card mdc-card-content card flex-grow-1"
          th:with="loginFormEnabled=${#cas.isTrue(#cas.theme('cas.login-form.enabled'))},
                   loginFormViewable=${#cas.isLoginFormViewable(#vars)}">
-
-       <div id="loginTabBar" class="mdc-tab-bar" role="tablist">
-           <div class="mdc-tab-scroller">
-               <div class="mdc-tab-scroller__scroll-area">
-                   <div class="mdc-tab-scroller__scroll-content">
-                       <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0"
-                               data-tab="qrLoginTab" th:if="${qrAuthenticationEnabled}">
-                          <span class="mdc-tab__content">
-                            <span class="mdc-tab__text-label" th:utext="#{screen.welcome.label.qr.login}">扫码登录</span>
-                          </span>
-                          <span class="mdc-tab-indicator mdc-tab-indicator--active">
-                              <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-                          </span>
-                          <span class="mdc-tab__ripple"></span>
-                       </button>
-                       <button class="mdc-tab" role="tab" aria-selected="false" tabindex="-1"
-                               data-tab="accountLoginTab" th:if="${loginFormViewable and loginFormEnabled}">
-                          <span class="mdc-tab__content">
-                              <span class="mdc-tab__text-label" th:utext="#{screen.welcome.label.account.login}">账号登录</span>
-                          </span>
-                          <span class="mdc-tab-indicator">
-                              <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
-                          </span>
-                          <span class="mdc-tab__ripple"></span>
-                       </button>
-                   </div>
-               </div>
-           </div>
-       </div>
-       <div class="tab-panels">
-           <div class="tab-panel active" data-panel="qrLoginTab" th:if="${qrAuthenticationEnabled}">
-               <section id="qrlogin" class="login-section login-qr d-xs-none d-md-block card-body">
-                   <div th:replace="~{fragments/qrAuthentication :: qrAuthentication}">
-                       <a href="fragments/qrAuthentication.html">qrAuthentication</a>
-                   </div>
-               </section>
-           </div>
-           <div class="tab-panel" data-panel="accountLoginTab" th:if="${loginFormViewable and loginFormEnabled}">
-               <section id="loginForm"
-                        class="login-section login-form card-body">
-                   <div th:replace="~{fragments/loginform :: loginform}">
-                       <a href="fragments/loginform.html">Login Form goes here</a>
-                   </div>
-               </section>
-           </div>
-       </div>
-    </div>
-    <div id="login-providers-card" th:if="${(#bools.isFalse(delegatedAuthenticationDynamicProviderSelection)
-                       && #bools.isFalse(delegatedAuthenticationDisabled))
-                       && (#cas.isTrue(delegatedAuthenticationProviderConfigurations)
-                       || #cas.isTrue(wsfedUrls))}">
-        <section id="loginProviders" class="login-section login-providers card-body">
-            <div th:replace="~{fragments/loginProviders :: loginProviders}">
-                <a href="fragments/loginProviders.html">loginProviders</a>
+        <div id="loginTab">
+            <div id="loginTabBar" class="mdc-tab-bar" role="tablist">
+                <div class="mdc-tab-scroller">
+                    <div class="mdc-tab-scroller__scroll-area">
+                        <div class="mdc-tab-scroller__scroll-content">
+                            <button class="mdc-tab mdc-tab--active" role="tab" aria-selected="true" tabindex="0"
+                                   data-tab="qrLoginTab" th:if="${qrAuthenticationEnabled}">
+                              <span class="mdc-tab__content">
+                                <span class="mdc-tab__text-label" th:utext="#{screen.welcome.label.qr.login}">扫码登录</span>
+                              </span>
+                              <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                  <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                              </span>
+                              <span class="mdc-tab__ripple"></span>
+                            </button>
+                            <button class="mdc-tab" role="tab" aria-selected="false" tabindex="-1"
+                                   data-tab="accountLoginTab" th:if="${loginFormViewable and loginFormEnabled}">
+                              <span class="mdc-tab__content">
+                                  <span class="mdc-tab__text-label" th:utext="#{screen.welcome.label.account.login}">账号登录</span>
+                              </span>
+                              <span class="mdc-tab-indicator">
+                                  <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                              </span>
+                              <span class="mdc-tab__ripple"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </section>
+            <div class="tab-panels">
+                <div class="tab-panel active" data-panel="qrLoginTab" th:if="${qrAuthenticationEnabled}">
+                   <section id="qrlogin" class="login-section login-qr d-xs-none d-md-block card-body">
+                       <div th:replace="~{fragments/qrAuthentication :: qrAuthentication}">
+                           <a href="fragments/qrAuthentication.html">qrAuthentication</a>
+                       </div>
+                   </section>
+                </div>
+                <div class="tab-panel" data-panel="accountLoginTab" th:if="${loginFormViewable and loginFormEnabled}">
+                    <section id="loginForm"
+                            class="login-section login-form card-body">
+                        <div th:replace="~{fragments/loginform :: loginform}">
+                            <a href="fragments/loginform.html">Login Form goes here</a>
+                        </div>
+                    </section>
+                </div>
+           </div>
+        </div>
+        <div id="login-providers-card" th:if="${(#bools.isFalse(delegatedAuthenticationDynamicProviderSelection)
+                           && #bools.isFalse(delegatedAuthenticationDisabled))
+                           && (#cas.isTrue(delegatedAuthenticationProviderConfigurations)
+                           || #cas.isTrue(wsfedUrls))}">
+            <section id="loginProviders" class="login-section login-providers card-body">
+                <div th:replace="~{fragments/loginProviders :: loginProviders}">
+                    <a href="fragments/loginProviders.html">loginProviders</a>
+                </div>
+            </section>
+        </div>
     </div>
 </div>
 </body>

@@ -52,7 +52,7 @@
                      class="d-flex justify-content-center flex-wrap"
                      th:style="'visibility:' + ${delegatedAuthenticationProviderPrimary != null ? 'hidden' : 'visible'}">
 
-                   <ul class="list-unstyled d-flex flex-column m-0 flex-fill"
+                   <ul class="list-unstyled d-flex flex-row m-0 flex-fill"
                        th:if="${#lists.size(delegatedAuthenticationProviderConfigurations) <= 10}">
                         <li class="p-1 login-provider-item"
                             th:each="entry: ${delegatedAuthenticationProviderConfigurations}"

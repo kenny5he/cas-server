@@ -24,3 +24,6 @@ div#content {
 .tab-panel.active {
     display: block;
 }
+.login-providers {
+    max-width: 100%;
+}
