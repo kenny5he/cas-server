@@ -16,6 +16,8 @@
         <module>cas-server-support-oidc</module>
         <module>cas-server-authentication-gauth</module>
         <module>cas-server-authentication-wechat</module>
+        <module>cas-server-authentication-alipay</module>
+        <module>cas-server-authentication-tiktok</module>
     </modules>
 
     <dependencies>
