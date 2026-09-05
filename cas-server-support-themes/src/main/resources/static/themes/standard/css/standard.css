@@ -3,17 +3,35 @@ div#content {
 }
 #login-card {
     max-width: 500px;
-}
-#qrlogin .card-body .card-text>div>img {
-    padding: 0 4rem;
-}
-#login-button {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 20px;
-    gap: 5%;
-    .mdc-button {
-        min-width: 40%;
+
+    .login-form {
+        padding: 1rem 2rem 0.5rem 2rem;
+    }
+
+    .login-qr {
+        padding: 1rem 2rem;
+
+        .card-body .card-text>div>img {
+            margin: 0 auto;
+            max-width: 75%;
+            max-height: 75%;
+            object-fit: contain;
+        }
+    }
+
+    #login-button {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 20px;
+        gap: 5%;
+        .mdc-button {
+            min-width: 40%;
+        }
+    }
+
+    .login-providers {
+        max-width: 100%;
+        padding: 0.5rem 2.5rem 0.5rem 2.5rem;
     }
 }
 
@@ -23,7 +41,4 @@ div#content {
 
 .tab-panel.active {
     display: block;
-}
-.login-providers {
-    max-width: 100%;
 }
