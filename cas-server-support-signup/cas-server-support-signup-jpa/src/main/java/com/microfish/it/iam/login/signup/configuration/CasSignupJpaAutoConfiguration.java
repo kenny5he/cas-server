@@ -41,7 +41,7 @@ import com.microfoolish.it.account.signup.registration.JpaAccountSignupPropertyL
 @AutoConfigureBefore(CasAccountManagementWebflowAutoConfiguration.class)
 @ImportAutoConfiguration({DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 @EnableConfigurationProperties(AccountSignupJpaProperties.class)
-@EnableJpaRepositories(basePackageClasses = JpaRegistrationPropertyRepository.class)
+@EnableJpaRepositories(basePackages = "com.microfish.it.iam.login.signup.repository")
 public class CasSignupJpaAutoConfiguration {
     @Bean
     @ConditionalOnMissingBean(RegistrationPropertyService.class)

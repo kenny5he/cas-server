@@ -1,0 +1,6 @@
+com.microfish.it.iam.login.signup.entity.JpaAccountRegistrationEntity=jakarta.persistence.Entity
+com.microfish.it.iam.login.signup.entity.JpaRegistrationPropertyEntity=jakarta.persistence.Entity
+com.microfish.it.iam.login.signup.entity.JpaRegistrationPropertyValueEntity=jakarta.persistence.Entity
+com.microfish.it.iam.login.signup.repository.JpaAccountRegistrationRepository=org.springframework.data.repository.Repository
+com.microfish.it.iam.login.signup.repository.JpaRegistrationPropertyRepository=org.springframework.data.repository.Repository
+com.microfish.it.iam.login.signup.repository.JpaRegistrationPropertyValueRepository=org.springframework.data.repository.Repository
