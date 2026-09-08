@@ -9,10 +9,10 @@
 
     <artifactId>cas-server-support-themes</artifactId>
     <dependencies>
-        <!-- Cas Server Core -->
+        <!-- Cas Server Core Configuration -->
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>cas-server-core</artifactId>
+            <artifactId>cas-server-core-configuration</artifactId>
             <version>${project.version}</version>
         </dependency>
 
@@ -33,6 +33,7 @@
             <artifactId>cas-server-support-themes-collection</artifactId>
             <version>${cas.server.version}</version>
         </dependency>
+
         <!-- 样式 主题 -->
         <dependency>
             <groupId>org.apereo.cas</groupId>
@@ -44,11 +45,6 @@
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-support-themes-core</artifactId>
             <version>${cas.server.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>cas-server-core-api</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 </project>

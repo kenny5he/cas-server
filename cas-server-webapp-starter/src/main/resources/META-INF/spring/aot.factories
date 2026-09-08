@@ -1,1 +1,1 @@
-org.springframework.aot.hint.RuntimeHintsRegistrar=com.microfish.it.account.login.server.nativex.CasWebAppResourcesRuntimeHints
+org.springframework.aot.hint.RuntimeHintsRegistrar=com.microfish.it.iam.login.server.nativex.CasWebAppResourcesRuntimeHints

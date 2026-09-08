@@ -17,12 +17,12 @@
 
         <div class="signup-wrap">
             <div class="signup-channel">
-                <button type="button" class="tab-side-btn" data-tab="emailTab">
+                <button type="button" class="tab-side-btn active" data-registration-type="email">
                     <span class="mdc-button__ripple"></span>
                     <span class="mdc-button__focus-ring"></span>
                     <span class="mdc-button__label" th:text="#{screen.acct.button.email.signUp}">Email Sign Up</span>
                 </button>
-                <button type="button" class="tab-side-btn active" data-tab="phoneTab">
+                <button type="button" class="tab-side-btn" data-registration-type="phone">
                     <span class="mdc-button__ripple"></span>
                     <span class="mdc-button__focus-ring"></span>
                     <span class="mdc-button__label" th:text="#{screen.acct.button.sms.signUp}">SMS Sign Up</span>
@@ -37,7 +37,8 @@
                            th:utext="${message.text}">Message Text</p>
                     </div>
 
-                    <section th:each="entry : ${registrationProperties}" class="cas-field form-group my-3">
+                    <section th:each="entry : ${registrationProperties}" class="cas-field form-group my-3"
+                             th:attr="data-registration-category=${entry.category}">
                         <label class="mdc-text-field mdc-text-field--outlined control-label"
                                th:if="${entry.type != 'select'}">
                             <span class="mdc-notched-outline">
@@ -75,9 +76,41 @@
                                 th:title="#{${entry.title}}"
                                 th:name="${entry.name}"
                                 th:classappend="${'custom-select ' + entry.cssClass}">
-                            <option th:each="option,status : ${entry.values}" th:value="${status.index}"
+                                <option th:each="option : ${entry.values}" th:value="${option}"
                                     th:text="${option}"></option>
                         </select>
+                    </section>
+
+                    <section class="cas-field form-group my-3">
+                        <label class="mdc-text-field mdc-text-field--outlined control-label">
+                            <span class="mdc-notched-outline">
+                                <span class="mdc-notched-outline__leading"></span>
+                                <span class="mdc-notched-outline__notch">
+                                    <span class="mdc-floating-label">Password</span>
+                                </span>
+                                <span class="mdc-notched-outline__trailing"></span>
+                            </span>
+                            <input class="mdc-text-field__input form-control" id="password" name="password"
+                                   type="password" required autocomplete="new-password"/>
+                        </label>
+                    </section>
+
+                    <section class="cas-field form-group my-3">
+                        <label class="mdc-text-field mdc-text-field--outlined control-label">
+                            <span class="mdc-notched-outline">
+                                <span class="mdc-notched-outline__leading"></span>
+                                <span class="mdc-notched-outline__notch">
+                                    <span class="mdc-floating-label">Verification code</span>
+                                </span>
+                                <span class="mdc-notched-outline__trailing"></span>
+                            </span>
+                            <input class="mdc-text-field__input form-control" id="verificationCode"
+                                   name="verificationCode" inputmode="text" maxlength="6" autocomplete="one-time-code"/>
+                        </label>
+                        <button type="button" class="mdc-button mdc-button--outlined" id="sendVerificationCode">
+                            <span class="mdc-button__label">Send verification code</span>
+                        </button>
+                        <span id="verificationStatus" role="status"></span>
                     </section>
 
                     <span th:if="${accountRegistrationCaptchaEnabled}">
@@ -86,6 +119,8 @@
 
                     <input type="hidden" name="execution" th:value="${flowExecutionKey}"/>
                     <input type="hidden" name="_eventId" value="submit"/>
+                    <input type="hidden" name="registrationType" id="registrationType" value="email"/>
+                    <input type="hidden" name="registrationToken" id="registrationToken"/>
                     <div class="form-actions d-flex justify-content-center">
                         <div th:replace="~{fragments/submitbutton :: submitButton (messageKey='cas.screen.acct.button.submit', id='submit', name='submit')}"></div>
 
@@ -105,5 +140,102 @@
     </div>
 
 </main>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("fm1");
+        const code = document.getElementById("verificationCode");
+        const status = document.getElementById("verificationStatus");
+        const typeInput = document.getElementById("registrationType");
+        const tokenInput = document.getElementById("registrationToken");
+        let codeSent = false;
+
+        function endpoint(path) {
+            return new URL(path, window.location.href).toString();
+        }
+
+        function selectedTarget(type) {
+            if (type === "email") {
+                return {target: (form.elements.email || {}).value || "", callingCode: ""};
+            }
+            return {
+                target: (form.elements.phone || form.elements.phoneNumber || {}).value || "",
+                callingCode: (form.elements.callingCode || {}).value || ""
+            };
+        }
+
+        function properties() {
+            const result = {};
+            Array.from(form.elements).forEach(function (element) {
+                if (element.name && !["execution", "_eventId", "verificationCode", "registrationType", "registrationToken"].includes(element.name)) {
+                    result[element.name] = element.value;
+                }
+            });
+            return result;
+        }
+
+        document.querySelectorAll("[data-registration-type]").forEach(function (button) {
+            button.addEventListener("click", function () {
+                const type = button.dataset.registrationType;
+                typeInput.value = type;
+                codeSent = false;
+                code.value = "";
+                document.querySelectorAll("[data-registration-category]").forEach(function (field) {
+                    const category = (field.dataset.registrationCategory || "").toLowerCase();
+                    field.hidden = category && category !== type &&
+                        !(type === "email" && category === "mail") &&
+                        !(type === "phone" && ["sms", "mobile", "mobilephone"].includes(category));
+                    if (field.hidden) {
+                        field.querySelectorAll("input, select").forEach(function (input) { input.value = ""; });
+                    }
+                });
+                document.querySelectorAll("[data-registration-type]").forEach(function (item) {
+                    item.classList.toggle("active", item === button);
+                });
+            });
+        });
+        document.querySelector("[data-registration-type='email']").click();
+
+        document.getElementById("sendVerificationCode").addEventListener("click", async function () {
+            const target = selectedTarget(typeInput.value);
+            status.textContent = "";
+            if (!(form.elements.password || {}).value) {
+                status.textContent = "Password is required";
+                return;
+            }
+            if (!target.target) {
+                status.textContent = "Registration address is required";
+                return;
+            }
+            try {
+                const response = await fetch(endpoint("register/code"), {
+                    method: "POST", headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({registrationType: typeInput.value, target: target.target, callingCode: target.callingCode})
+                });
+                if (!response.ok) throw new Error("Unable to send verification code");
+                codeSent = true;
+                status.textContent = "Verification code sent";
+            } catch (error) {
+                status.textContent = error.message;
+            }
+        });
+
+        code.addEventListener("input", async function () {
+            if (!codeSent || code.value.length !== 6) return;
+            try {
+                const response = await fetch(endpoint("register/verify"), {
+                    method: "POST", headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({registrationType: typeInput.value, verificationCode: code.value, properties: properties()})
+                });
+                const result = await response.json();
+                if (!response.ok) throw new Error(result.error || "Verification failed");
+                tokenInput.value = result.token;
+                codeSent = false;
+                status.textContent = "Verified";
+            } catch (error) {
+                status.textContent = error.message;
+            }
+        });
+    });
+</script>
 </body>
 </html>

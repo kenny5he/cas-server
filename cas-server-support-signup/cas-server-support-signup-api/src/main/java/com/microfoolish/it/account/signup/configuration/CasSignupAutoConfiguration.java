@@ -16,8 +16,8 @@
 
 package com.microfoolish.it.account.signup.configuration;
 
-import com.microfish.it.account.login.configuration.annotation.EnableConfigurationMapping;
-import org.apereo.cas.acct.AccountRegistrationService;
+import java.util.List;
+
 import org.apereo.cas.config.CasAccountManagementWebflowAutoConfiguration;
 import org.apereo.cas.configuration.CasConfigurationProperties;
 import org.apereo.cas.configuration.features.CasFeatureModule;
@@ -32,8 +32,11 @@ import org.apereo.cas.web.flow.CasWebflowConstants;
 import org.apereo.cas.web.flow.CasWebflowExecutionPlanConfigurer;
 import org.apereo.cas.web.flow.CasWebflowIdExtractor;
 import org.apereo.cas.web.flow.actions.WebflowActionBeanSupplier;
+
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -44,10 +47,23 @@ import org.springframework.core.annotation.Order;
 import org.springframework.webflow.definition.registry.FlowDefinitionRegistry;
 import org.springframework.webflow.engine.builder.support.FlowBuilderServices;
 import org.springframework.webflow.execution.Action;
+import org.springframework.data.redis.core.StringRedisTemplate;
 
-import java.util.List;
+import com.microfish.it.iam.login.configuration.annotation.EnableConfigurationMapping;
+import com.microfoolish.it.account.signup.registration.SignupAccountStore;
+import com.microfoolish.it.account.signup.registration.services.AccountRegistrationService;
+import com.microfoolish.it.account.signup.verficationcode.cache.VerificationCodeCache;
+import com.microfoolish.it.account.signup.verficationcode.VerificationCodeSender;
+import com.microfoolish.it.account.signup.verficationcode.services.VerificationCodeService;
+import com.microfoolish.it.account.signup.verficationcode.services.CompositeVerificationCodeCache;
+import com.microfoolish.it.account.signup.registration.services.DefaultAccountRegistrationService;
+import com.microfoolish.it.account.signup.verficationcode.services.DefaultVerificationCodeService;
+import com.microfoolish.it.account.signup.verficationcode.services.EmailVerificationCodeSender;
+import com.microfoolish.it.account.signup.verficationcode.services.SmsVerificationCodeSender;
+import com.microfoolish.it.account.signup.registration.services.RegistrationPropertyService;
 
 /**
+ *
  * @author kenny.he
  * @since 2026/09/04
  */
@@ -57,7 +73,6 @@ import java.util.List;
 public class CasSignupAutoConfiguration {
 
     @Bean
-    @RefreshScope(proxyMode = ScopedProxyMode.DEFAULT)
     @ConditionalOnMissingBean(name = "casSignupEndpointConfigurer")
     public CasWebSecurityConfigurer<Void> casSignupEndpointConfigurer() {
         return new CasWebSecurityConfigurer<>() {
@@ -69,14 +84,66 @@ public class CasSignupAutoConfiguration {
     }
 
     @Bean
+    @ConditionalOnMissingBean(VerificationCodeCache.class)
+    public VerificationCodeCache signupVerificationCodeCache(final ObjectProvider<StringRedisTemplate> redisTemplate) {
+        return new CompositeVerificationCodeCache(redisTemplate);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(name = "emailVerificationCodeSender")
+    public VerificationCodeSender emailVerificationCodeSender(
+            final CasConfigurationProperties casProperties,
+            final CommunicationsManager communicationsManager,
+            @Qualifier(TenantExtractor.BEAN_NAME) final TenantExtractor tenantExtractor) {
+        return new EmailVerificationCodeSender(casProperties, communicationsManager, tenantExtractor);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(name = "smsVerificationCodeSender")
+    public VerificationCodeSender smsVerificationCodeSender(
+            final CasConfigurationProperties casProperties,
+            final CommunicationsManager communicationsManager,
+            @Qualifier(TenantExtractor.BEAN_NAME) final TenantExtractor tenantExtractor) {
+        return new SmsVerificationCodeSender(casProperties, communicationsManager, tenantExtractor);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(VerificationCodeService.class)
+    public VerificationCodeService signupVerificationCodeService(
+            final VerificationCodeCache cache,
+            final List<VerificationCodeSender> senders) {
+        return new DefaultVerificationCodeService(cache, senders);
+    }
+
+    @Bean
+    @ConditionalOnBean({SignupAccountStore.class, RegistrationPropertyService.class})
+    @ConditionalOnMissingBean(AccountRegistrationService.class)
+    public AccountRegistrationService signupRegistrationService(
+            final RegistrationPropertyService propertyService,
+            final VerificationCodeService verificationCodeService,
+            final SignupAccountStore accountStore,
+            @Qualifier(org.apereo.cas.acct.AccountRegistrationService.BEAN_NAME) final org.apereo.cas.acct.AccountRegistrationService accountRegistrationService) {
+        return new DefaultAccountRegistrationService(propertyService, verificationCodeService,
+                accountStore, accountRegistrationService);
+    }
+
+    @Bean
+    @ConditionalOnBean(AccountRegistrationService.class)
+    @ConditionalOnMissingBean
+    public SignupRegistrationController signupRegistrationController(
+            final AccountRegistrationService registrationService) {
+        return new SignupRegistrationController(registrationService);
+    }
+
+    @Bean
     @RefreshScope(proxyMode = ScopedProxyMode.DEFAULT)
     @ConditionalOnMissingBean(name = CasWebflowConstants.ACTION_ID_ACCOUNT_REGISTRATION_SUBMIT)
     public Action submitAccountRegistrationAction(
             @Qualifier(TenantExtractor.BEAN_NAME) final TenantExtractor tenantExtractor,
             final ConfigurableApplicationContext applicationContext,
             final CasConfigurationProperties casProperties,
-            @Qualifier(AccountRegistrationService.BEAN_NAME)
-            final AccountRegistrationService accountRegistrationService,
+            @Qualifier(org.apereo.cas.acct.AccountRegistrationService.BEAN_NAME)
+            final org.apereo.cas.acct.AccountRegistrationService accountRegistrationService,
             @Qualifier(TicketFactory.BEAN_NAME) final TicketFactory ticketFactory,
             @Qualifier(TicketRegistry.BEAN_NAME) final TicketRegistry ticketRegistry,
             final CommunicationsManager communicationsManager) {

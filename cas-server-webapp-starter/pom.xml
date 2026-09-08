@@ -107,7 +107,7 @@
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>cas-server-support-signin-jpa</artifactId>
+            <artifactId>cas-server-authentication-jpa</artifactId>
             <version>${project.version}</version>
         </dependency>
 

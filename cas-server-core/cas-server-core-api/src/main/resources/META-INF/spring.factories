@@ -1,2 +1,0 @@
-org.springframework.boot.env.EnvironmentPostProcessor=\
-com.microfish.it.account.login.configuration.processer.ConfigurationMappingPostProcessor

@@ -20,7 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>cas-server-core-api</artifactId>
+            <artifactId>cas-server-core-configuration</artifactId>
             <version>${project.version}</version>
         </dependency>
 
@@ -40,6 +40,11 @@
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-core-notifications-api</artifactId>
             <version>${cas.server.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-redis</artifactId>
         </dependency>
 
         <dependency>

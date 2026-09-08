@@ -16,8 +16,11 @@
 
 package com.microfoolish.it.account.signup.configuration;
 
-import com.microfish.it.account.login.configuration.annotation.ConfigurationPropertiesMapping;
-import com.microfish.it.account.login.configuration.annotation.PropertyMapping;
+import lombok.Getter;
+import lombok.Setter;
+
+import com.microfish.it.iam.login.configuration.annotation.ConfigurationPropertiesMapping;
+import com.microfish.it.iam.login.configuration.annotation.PropertyMapping;
 
 /**
  *
@@ -26,6 +29,8 @@ import com.microfish.it.account.login.configuration.annotation.PropertyMapping;
  * @author kenny.he
  * @since 2026/09/04
  */
+@Getter
+@Setter
 @ConfigurationPropertiesMapping(casPrefix = "cas.account-registration.core.crypto", prefix = "account.signup.crypto")
 public class CasSignupCryptoProperties {
 

@@ -1,1 +1,1 @@
-com.microfish.it.account.login.cookie.configuration.CasTicketGrantingCookieAutoConfiguration
+com.microfish.it.iam.login.cookie.configuration.CasTicketGrantingCookieAutoConfiguration

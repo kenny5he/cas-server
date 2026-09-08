@@ -1,0 +1,2 @@
+com.microfish.it.iam.login.authentication.config.CasJpaAuthenticationAutoConfiguration
+com.microfish.it.iam.login.authentication.config.CasSignInJpaDataConfiguration

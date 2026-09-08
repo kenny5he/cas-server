@@ -11,13 +11,16 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>cas-server-core-api</module>
+        <module>cas-server-core-configuration</module>
         <module>cas-server-core-authentication</module>
         <module>cas-server-core-multitenancy</module>
         <module>cas-server-core-cookie</module>
         <module>cas-server-core-session</module>
         <module>cas-server-core-jpa</module>
         <module>cas-server-core-webflow</module>
+        <module>cas-server-core-cache</module>
+        <module>cas-server-core-captcha</module>
+        <module>cas-server-core-audit</module>
     </modules>
 
     <dependencies>

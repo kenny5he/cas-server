@@ -18,6 +18,8 @@
         <module>cas-server-authentication-wechat</module>
         <module>cas-server-authentication-alipay</module>
         <module>cas-server-authentication-tiktok</module>
+        <module>cas-server-authentication-jdbc</module>
+        <module>cas-server-authentication-jpa</module>
     </modules>
 
     <dependencies>
@@ -41,7 +43,7 @@
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>cas-server-core-api</artifactId>
+            <artifactId>cas-server-core-configuration</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

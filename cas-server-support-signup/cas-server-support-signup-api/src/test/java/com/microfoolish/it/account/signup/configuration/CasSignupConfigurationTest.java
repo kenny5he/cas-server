@@ -7,8 +7,8 @@
 
 package com.microfoolish.it.account.signup.configuration;
 
-import com.microfish.it.account.login.configuration.processer.ConfigurationMappingEnvironment;
-import com.microfish.it.account.login.configuration.processer.ConfigurationMappingScanner;
+import com.microfish.it.iam.login.configuration.processer.ConfigurationMappingEnvironment;
+import com.microfish.it.iam.login.configuration.processer.ConfigurationMappingScanner;
 import jakarta.servlet.http.HttpServletRequest;
 import junit.framework.TestCase;
 import org.apereo.cas.acct.AccountRegistrationRequest;
@@ -20,6 +20,7 @@ import org.apereo.cas.ticket.TransientSessionTicketFactory;
 import org.apereo.cas.ticket.registry.TicketRegistry;
 import org.apereo.cas.web.flow.CasWebflowConfigurer;
 import org.apereo.cas.web.flow.CasWebflowConstants;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.support.StaticApplicationContext;
 import org.springframework.core.env.MapPropertySource;
 import org.springframework.core.env.StandardEnvironment;
@@ -74,10 +75,12 @@ public class CasSignupConfigurationTest extends TestCase {
         assertEquals("logout", extractor.extract(request, "logout"));
     }
 
-    public void testRegistrationEndpointIsPubliclyAccessible() {
+    public void testRegistrationEndpointIsPubliclyAccessible() throws Exception {
         var endpointConfigurer = new CasSignupAutoConfiguration().casSignupEndpointConfigurer();
 
-        assertEquals(List.of("/registration"), endpointConfigurer.getIgnoredEndpoints());
+        assertEquals(List.of("/register"), endpointConfigurer.getIgnoredEndpoints());
+        assertFalse(CasSignupAutoConfiguration.class.getMethod("casSignupEndpointConfigurer")
+                .isAnnotationPresent(RefreshScope.class));
     }
 
     public void testRegistrationEntryIsAddedToLoginWebflow() {
@@ -114,7 +117,7 @@ public class CasSignupConfigurationTest extends TestCase {
         var action = new CasSignupSubmitAccountRegistrationAction(
                 registrationService, casProperties, null, ticketFactory, ticketRegistry, null);
 
-        assertEquals("https://cas.example.org/cas/registration?acctregtoken=ticket-id",
+        assertEquals("https://cas.example.org/cas/register?acctregtoken=ticket-id",
                 action.createAccountRegistrationActivationUrl(new AccountRegistrationRequest()));
     }
 

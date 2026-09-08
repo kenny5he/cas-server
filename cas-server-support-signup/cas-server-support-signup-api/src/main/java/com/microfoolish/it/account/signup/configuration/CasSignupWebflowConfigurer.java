@@ -25,7 +25,7 @@ import org.springframework.webflow.definition.registry.FlowDefinitionRegistry;
 import org.springframework.webflow.engine.builder.support.FlowBuilderServices;
 
 /**
- * Exposes account registration through the main CAS login flow at {@code /registration}.
+ * Exposes account registration through the main CAS login flow at {@code /register}.
  *
  * @author kenny.he
  * @since 2026/09/04
