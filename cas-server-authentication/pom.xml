@@ -14,10 +14,6 @@
         <module>cas-server-support-oauth2</module>
         <module>cas-server-support-pac4j</module>
         <module>cas-server-support-oidc</module>
-        <module>cas-server-authentication-gauth</module>
-        <module>cas-server-authentication-wechat</module>
-        <module>cas-server-authentication-alipay</module>
-        <module>cas-server-authentication-tiktok</module>
         <module>cas-server-authentication-jdbc</module>
         <module>cas-server-authentication-jpa</module>
     </modules>

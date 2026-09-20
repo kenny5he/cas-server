@@ -31,6 +31,8 @@
         <module>cas-server-core</module>
         <!-- 认证模块 -->
         <module>cas-server-authentication</module>
+        <!-- 第三方认证 -->
+        <module>cas-server-authentication-thirdparty</module>
         <!-- 注册模块-->
         <module>cas-server-support-signup</module>
         <!-- 个人资料模块 -->
