@@ -59,7 +59,7 @@
                             th:switch="${entry.type}">
 
                             <form method="post" th:id="${'form' + entry.name}" th:action="@{/login}">
-                                <button class="mdc-button mdc-button--raised me-2 btn btn-primary d-block w-100"
+                                <button class="mdc-button me-2 d-block w-100"
                                         name="submitButton"
                                         id="submitButton"
                                         type="submit"
@@ -68,6 +68,7 @@
                                         th:id="${entry.name}"
                                         th:classappend="'mdc-button-' + ${entry.type} + ${entry.cssClass}"
                                         accesskey="s">
+                                    <i class="mdi mdi-login mdc-button__icon" aria-hidden="true"></i>
                                     <span class="mdc-button__label">[[${#strings.defaultString(entry.title,entry.name)}]]</span>
                                 </button>
 

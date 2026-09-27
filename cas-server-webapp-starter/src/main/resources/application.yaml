@@ -54,7 +54,7 @@ account:
         agentId: 1000003
         scope: snsapi_login
         secret: 5CjhcfUeiXAkddvXn0paYVssix20kswPlgig8AwIoLk
-        client-name: Work_WeChat
+        client-name: WorkWeChat
         callbackUrlType: QUERY_PARAMETER
       gitee:
         id: 10c1fc08d912ac919885c0d1d265528f9b50a2b588671664dfa5ff320b56d8dc
