@@ -127,6 +127,7 @@ CREATE TABLE IF NOT EXISTS cas_property_value_t(
     property_id int8 NOT NULL,
     "code" VARCHAR(50) NOT NULL,
     "value" VARCHAR(200)  NOT NULL,
+    "order" int8 NOT NULL default 1,
     enabled int8 NOT NULL default 1,
     creation_date timestamp NOT NULL,
     created_by VARCHAR(10),
