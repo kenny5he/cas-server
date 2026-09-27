@@ -1,7 +1,7 @@
 server:
   port: 443
   servlet:
-    context-path: /cas
+    context-path: /login
   ssl:
     key-store: classpath:login.microfoolish.com.jks
     key-store-password: 9BGfqk9I
