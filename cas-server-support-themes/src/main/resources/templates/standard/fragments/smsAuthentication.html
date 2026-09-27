@@ -33,7 +33,7 @@
 
         <div class="form-wrapper">
 
-            <form method="post" id="fm1" th:object="${credential}" action="login" onsubmit="loginFormSubmission();">
+            <form method="post" id="fm1" th:object="${credential}" th:action="@{/signin}" onsubmit="loginFormSubmission();">
                 <div id="login-form-controls" th:unless="${loginFormViewable or loginFormEnabled}">
                     <div id="loginErrorsPanel" class="alert alert-danger banner banner-danger banner-dismissible"
                          th:if="${#fields.hasErrors('*')}">

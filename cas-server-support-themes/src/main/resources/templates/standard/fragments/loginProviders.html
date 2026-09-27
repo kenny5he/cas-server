@@ -58,7 +58,7 @@
                             th:each="entry: ${delegatedAuthenticationProviderConfigurations}"
                             th:switch="${entry.type}">
 
-                            <form method="post" th:id="${'form' + entry.name}" th:action="@{/login}">
+                            <form method="post" th:id="${'form' + entry.name}" th:action="@{/signin}">
                                 <button class="mdc-button me-2 d-block w-100"
                                         name="submitButton"
                                         id="submitButton"
@@ -196,7 +196,7 @@
                 $(identityProviderOptions).on('change', function () {
                     const selectedValue = $(this).val();
 
-                    const formAction = /*[[@{/login}]]*/;
+                    const formAction = /*[[@{/signin}]]*/;
                     const flowExecutionKey = /*[[${flowExecutionKey}]]*/;
 
                     const form = $('<form>', {

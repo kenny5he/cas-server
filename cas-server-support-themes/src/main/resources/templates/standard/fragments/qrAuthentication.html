@@ -75,7 +75,7 @@
             /*]]>*/
         </script>
 
-        <form method="post" id="submitForm" th:action="@{/login}">
+        <form method="post" id="submitForm" th:action="@{/signin}">
             <input type="hidden" id="eventId" name="_eventId" value="submit"/>
             <input type="hidden" name="execution" th:value="${flowExecutionKey}"/>
         </form>

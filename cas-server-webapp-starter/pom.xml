@@ -73,6 +73,12 @@
             <version>${project.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>cas-server-core-webflow</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!-- Notification -->
         <dependency>
             <groupId>${project.groupId}</groupId>
